@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Build output
+.next/
+dist/
+build/
+out/
+
+# Coverage
+coverage/
+
+# Logs
+*.log
+logs/
+
+# Cache
+.cache/
+.turbo/
+.pnpm-store/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# Prisma
+prisma/*.db
+prisma/*.db-journal
