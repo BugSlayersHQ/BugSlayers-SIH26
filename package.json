@@ -11,7 +11,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "pnpm --filter frontend exec tsc --noEmit && pnpm --filter backend typecheck && pnpm --filter worker typecheck",
+    "build": "pnpm --filter frontend build && pnpm --filter backend build && pnpm --filter worker build"
   },
   "keywords": [],
   "author": "",
