@@ -3,3 +3,12 @@ packages:
   - 'backend'
   - 'worker'
   - 'packages/*'
+
+ignoredBuiltDependencies:
+  - msgpackr-extract
+  - sharp
+  - unrs-resolver
+  - workerd
+onlyBuiltDependencies:
+  - '@prisma/engines'
+  - prisma

@@ -1,0 +1,19 @@
+{
+  "name": "worker",
+  "version": "0.1.0",
+  "private": true,
+  "description": "BugSlayers SIH 2026 background worker",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/worker.ts",
+    "build": "tsc",
+    "start": "node dist/worker.js",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
+  },
+  "packageManager": "pnpm@10.34.5",
+  "devDependencies": {
+    "@types/node": "24.10.1",
+    "tsx": "4.23.13"
+  }
+}
