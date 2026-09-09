@@ -3,3 +3,7 @@ packages:
   - 'backend'
   - 'worker'
   - 'packages/*'
+
+ignoredBuiltDependencies:
+  - sharp
+  - unrs-resolver
