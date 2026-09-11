@@ -1,0 +1,9 @@
+{
+  "name": "land-record-digitization-system",
+  "version": "1.0.0",
+  "description": "Intelligent Land Record Digitization and Validation System landing page",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js"
+  }
+}

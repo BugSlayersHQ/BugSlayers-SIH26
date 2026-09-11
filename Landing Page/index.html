@@ -1,0 +1,2158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Intelligent Land Record Digitization and Validation System — AI-Powered Document Intelligence</title>
+  <meta name="description" content="AI-powered system for automatically extracting structured information from scanned land records, handwritten documents, maps, and legacy PDF files, validating extracted records, and integrating with modern land information systems.">
+  
+  <!-- Open Graph / Meta -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Intelligent Land Record Digitization and Validation System">
+  <meta property="og:description" content="Transforming legacy handwritten registers, scanned PDFs, and cadastral maps into structured, validated digital land records.">
+  <meta name="theme-color" content="#1C1917">
+
+  <!-- Favicon SVG -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%231C1917'/><polygon points='16,7 25,12 25,22 16,27 7,22 7,12' fill='none' stroke='%23FE551B' stroke-width='2.5'/><circle cx='16' cy='16' r='3' fill='%23FE551B'/></svg>">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ==========================================================================
+       HEADER & NAVIGATION
+       ========================================================================== -->
+  <header class="site-header" id="mainHeader">
+    <div class="container nav-container">
+      <a href="#" class="brand-logo" aria-label="LandAI Home">
+        <div class="brand-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+        </div>
+        <span>LandAI</span>
+      </a>
+
+      <nav class="nav-menu" aria-label="Main Navigation">
+        <a href="#problem" class="nav-link">Challenges</a>
+        <a href="#workflow" class="nav-link">Workflow</a>
+        <a href="#features" class="nav-link">Features</a>
+        <a href="#ai-approach" class="nav-link">AI Intelligence</a>
+        <a href="#land-data" class="nav-link">Predefined Fields</a>
+        <a href="#gis" class="nav-link">GIS & Maps</a>
+        <a href="#dashboard" class="nav-link">Monitoring</a>
+        <a href="#tech-stack" class="nav-link">Tech Stack</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button type="button" class="search-trigger-btn" id="cmdSearchTrigger" aria-label="Search sample land records and schema">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <span>Search records, khasra...</span>
+          <kbd class="search-kbd">⌘K</kbd>
+        </button>
+
+        <a href="#workflow" class="btn btn-secondary">View Workflow</a>
+        <a href="#features" class="btn btn-primary">Explore Solution</a>
+
+        <button type="button" class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle mobile menu" aria-expanded="false">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-nav-drawer" id="mobileNavDrawer">
+      <a href="#problem" class="nav-link">Challenges</a>
+      <a href="#workflow" class="nav-link">Workflow</a>
+      <a href="#features" class="nav-link">Features</a>
+      <a href="#ai-approach" class="nav-link">AI Intelligence</a>
+      <a href="#land-data" class="nav-link">Predefined Fields</a>
+      <a href="#gis" class="nav-link">GIS & Cadastral</a>
+      <a href="#dashboard" class="nav-link">Monitoring</a>
+      <a href="#tech-stack" class="nav-link">Suggested Tech Stack</a>
+      <a href="#stakeholders" class="nav-link">Stakeholders</a>
+      <div style="display: flex; gap: 12px; margin-top: 8px;">
+        <a href="#workflow" class="btn btn-secondary" style="flex: 1;">View Workflow</a>
+        <a href="#features" class="btn btn-primary" style="flex: 1;">Explore Solution</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       HERO SECTION
+       ========================================================================== -->
+  <section class="hero-section" id="hero">
+    <div class="container hero-content">
+      <div class="hero-chip-link">
+        <div class="chip">
+          <span class="new-pill">PROPOSED SYSTEM</span>
+          <span>AI-POWERED LAND RECORD DIGITIZATION</span>
+        </div>
+      </div>
+
+      <h1 class="headline-display hero-title">
+        Transforming Legacy Land Records into Intelligent Digital Data
+      </h1>
+
+      <p class="body-lg hero-desc">
+        A proposed AI-powered platform utilizing advanced OCR, Computer Vision, and Natural Language Processing to recognize printed and handwritten text in multiple Indian languages, automatically extract structured attributes from legacy registers, maps, and scanned PDFs, and validate records for modern land-management systems.
+      </p>
+
+      <div class="hero-cta-group">
+        <a href="#features" class="btn btn-primary btn-lg">Explore the Solution</a>
+        <a href="#workflow" class="btn btn-secondary btn-lg">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </svg>
+          <span>View How It Works</span>
+        </a>
+      </div>
+
+      <div class="hero-trust-bar">
+        <div class="hero-trust-item">
+          <span>Multilingual Indian Language Recognition</span>
+        </div>
+        <div class="hero-trust-dot"></div>
+        <div class="hero-trust-item">
+          <span>Human-Assisted Verification Workflow</span>
+        </div>
+        <div class="hero-trust-dot"></div>
+        <div class="hero-trust-item">
+          <span>Designed for LRMS & DILRMP Integration (Proposed)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================================================
+         HERO PRODUCT WINDOW MOCKUP: LAND RECORD INTELLIGENCE DASHBOARD
+         ========================================================================== -->
+    <div class="container hero-visual-wrapper">
+      <!-- Floating Card Left -->
+      <div class="floating-stat-card left">
+        <div class="stat-icon-circle green">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+        </div>
+        <div class="stat-content">
+          <div class="stat-val">Automated Validation</div>
+          <div class="stat-lbl">Cross-database & duplicate verification</div>
+        </div>
+      </div>
+
+      <!-- Floating Card Right -->
+      <div class="floating-stat-card right">
+        <div class="stat-icon-circle orange">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+        </div>
+        <div class="stat-content">
+          <div class="stat-val">Confidence Scoring</div>
+          <div class="stat-lbl">Automatic identification of uncertain fields</div>
+        </div>
+      </div>
+
+      <!-- Main Product Window -->
+      <div class="hero-product-window">
+        <!-- Window Chrome -->
+        <div class="window-chrome">
+          <div class="window-dots">
+            <div class="window-dot red"></div>
+            <div class="window-dot yellow"></div>
+            <div class="window-dot green"></div>
+          </div>
+
+          <div class="window-search-bar">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <span>landrecords.gov.in / demonstration / sample-record-inspector</span>
+          </div>
+
+          <div class="window-actions">
+            <div class="window-badge-verified">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>Demonstration Console</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Window Body -->
+        <div class="window-body">
+          <!-- Left Processing Sidebar -->
+          <aside class="workspace-sidebar">
+            <div>
+              <div class="sidebar-section-title">Navigation Modules</div>
+              <ul class="sidebar-nav-list">
+                <li class="sidebar-nav-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                  <span>Documents</span>
+                  <span class="nav-count">Queue</span>
+                </li>
+                <li class="sidebar-nav-item active">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+                  <span>Digitization</span>
+                  <span class="nav-count">Active</span>
+                </li>
+                <li class="sidebar-nav-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                  <span>Validation</span>
+                  <span class="nav-count">Rules</span>
+                </li>
+                <li class="sidebar-nav-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                  <span>Verification</span>
+                  <span class="nav-count" style="background:#FFF7ED; color:#EA580C;">Review</span>
+                </li>
+                <li class="sidebar-nav-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg>
+                  <span>GIS & Cadastral</span>
+                  <span class="nav-count">Maps</span>
+                </li>
+                <li class="sidebar-nav-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                  <span>Analytics</span>
+                  <span class="nav-count">Monitor</span>
+                </li>
+                <li class="sidebar-nav-item">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                  <span>Audit Trail</span>
+                  <span class="nav-count">Log</span>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <div class="sidebar-section-title">Illustrative Document Queue</div>
+              <ul class="sidebar-nav-list">
+                <li class="sidebar-nav-item active">
+                  <span style="width: 8px; height: 8px; border-radius: 50%; background: #22C55E;"></span>
+                  <span>Sample_Register_Page_01.pdf</span>
+                </li>
+                <li class="sidebar-nav-item">
+                  <span style="width: 8px; height: 8px; border-radius: 50%; background: #FE551B;"></span>
+                  <span>Sample_Handwritten_Deed_02.tiff</span>
+                </li>
+                <li class="sidebar-nav-item">
+                  <span style="width: 8px; height: 8px; border-radius: 50%; background: #3B82F6;"></span>
+                  <span>Sample_Cadastral_Sheet_03.pdf</span>
+                </li>
+              </ul>
+            </div>
+          </aside>
+
+          <!-- Center Canvas: Extracted Land Record Preview -->
+          <main class="editor-canvas">
+            <div class="doc-breadcrumbs">
+              <span style="color: var(--color-tertiary); font-weight: 700;">[Illustrative Demonstration Sample]</span> / <span>District: Sample District</span> / <span>Tehsil: Sample Tehsil</span> / <span>Village: Sample Village</span>
+            </div>
+
+            <div class="doc-header-row">
+              <h2 class="doc-title">Intelligent Land Record Classification & Extraction (Illustrative Mockup)</h2>
+              <div class="doc-authors">
+                <div class="author-avatar a1" title="Revenue Inspector (Role)">RI</div>
+                <div class="author-avatar a2" title="Reviewing Officer (Role)">RO</div>
+                <div class="author-avatar a3" title="AI Extraction Pipeline">AI</div>
+              </div>
+            </div>
+
+            <div class="doc-meta-tags">
+              <span class="doc-meta-pill">Document: Sample Scanned Historical Register</span>
+              <span class="doc-meta-pill">Script: Multilingual Recognition</span>
+              <span class="doc-meta-pill" style="color: #047857; background: #ECFDF5;">● Automated Rules Checked</span>
+              <span class="doc-meta-pill" style="color: #B45309; background: #FFFBEB;">● Uncertain Field Identified</span>
+            </div>
+
+            <p class="doc-body-text">
+              Demonstration of how the proposed system analyzes a sample historical record, automatically maps attributes to predefined fields, applies confidence scoring, and flags uncertain values for human verification. <em>(Note: All names, numbers, and locations below are illustrative fictional demonstration data).</em>
+            </p>
+
+            <!-- Structured Land Record Fields Card -->
+            <div style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); overflow: hidden; margin-top: 14px; box-shadow: var(--shadow-xs);">
+              <table class="record-fields-table">
+                <thead>
+                  <tr>
+                    <th>Predefined Field</th>
+                    <th>Extracted Value (Demonstration Data)</th>
+                    <th>Confidence & Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <span class="record-field-name">Landowner Details</span>
+                      <span class="record-field-hindi">खातेदाराचा तपशील</span>
+                    </td>
+                    <td><strong>Sample Landowner Name (Illustrative Record)</strong></td>
+                    <td><span class="badge-status verified">✓ Verified</span></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span class="record-field-name">Survey Number</span>
+                      <span class="record-field-hindi">सर्व्हे नंबर</span>
+                    </td>
+                    <td><code>Sample Survey No. 101</code></td>
+                    <td><span class="badge-status confidence-high">● High Confidence</span></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span class="record-field-name">Khasra Number</span>
+                      <span class="record-field-hindi">खसरा क्रमांक</span>
+                    </td>
+                    <td><code>Sample Khasra No. 101/1</code></td>
+                    <td><span class="badge-status confidence-high">● High Confidence</span></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span class="record-field-name">Khata Number</span>
+                      <span class="record-field-hindi">खाते क्रमांक</span>
+                    </td>
+                    <td><code>Sample Khata No. 45</code></td>
+                    <td><span class="badge-status verified">✓ Verified</span></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span class="record-field-name">Plot Area</span>
+                      <span class="record-field-hindi">क्षेत्रफळ (हेक्टर / एकर)</span>
+                    </td>
+                    <td><strong>1.25 Hectares</strong> (3.08 Acres) [Sample]</td>
+                    <td><span class="badge-status needs-review">⚠ Needs Review</span></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span class="record-field-name">Village</span>
+                      <span class="record-field-hindi">गाव</span>
+                    </td>
+                    <td>Sample Village</td>
+                    <td><span class="badge-status verified">✓ Verified</span></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span class="record-field-name">Tehsil</span>
+                      <span class="record-field-hindi">तहसील / तालुका</span>
+                    </td>
+                    <td>Sample Tehsil</td>
+                    <td><span class="badge-status verified">✓ Verified</span></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span class="record-field-name">District</span>
+                      <span class="record-field-hindi">जिल्हा</span>
+                    </td>
+                    <td>Sample District</td>
+                    <td><span class="badge-status verified">✓ Verified</span></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span class="record-field-name">Land Classification</span>
+                      <span class="record-field-hindi">जमिनीचा प्रकार</span>
+                    </td>
+                    <td>Agricultural (Sample Classification)</td>
+                    <td><span class="badge-status confidence-high">● High Confidence</span></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span class="record-field-name">Ownership Details</span>
+                      <span class="record-field-hindi">मालकी हक्क</span>
+                    </td>
+                    <td>Single Title Holder (Sample Tenure)</td>
+                    <td><span class="badge-status confidence-high">● High Confidence</span></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span class="record-field-name">Mutation Records</span>
+                      <span class="record-field-hindi">फेरफार नोंद</span>
+                    </td>
+                    <td>Sample Mutation Entry No. 101</td>
+                    <td><span class="badge-status verified">✓ Verified</span></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span class="record-field-name">Registration Information</span>
+                      <span class="record-field-hindi">नोंदणी माहिती</span>
+                    </td>
+                    <td>Sample Registration Volume 12, Page 4</td>
+                    <td><span class="badge-status verified">✓ Verified</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </main>
+
+          <!-- Right Inspector Sidebar -->
+          <aside class="workspace-inspector">
+            <div class="inspector-card">
+              <div class="inspector-title">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="12 8 8 12 12 16 12 8"></polygon></svg>
+                <span>AI Extraction Inspector</span>
+              </div>
+              <div class="inspector-text">
+                Demonstration of confidence assessment and automatic identification of uncertain fields:
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 6px; margin: 10px 0; font-size: 11px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <span>Landowner Details</span>
+                  <span class="badge-status verified" style="font-size: 10px; padding: 1px 6px;">Verified</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <span>Survey Number</span>
+                  <span class="badge-status confidence-high" style="font-size: 10px; padding: 1px 6px;">High Confidence</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <span>Khasra Number</span>
+                  <span class="badge-status confidence-high" style="font-size: 10px; padding: 1px 6px;">High Confidence</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; background: #FFFBEB; padding: 4px; border-radius: 4px;">
+                  <span style="font-weight: 600; color: #B45309;">Plot Area</span>
+                  <span class="badge-status needs-review" style="font-size: 10px; padding: 1px 6px;">Needs Review</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <span>Mutation Record</span>
+                  <span class="badge-status verified" style="font-size: 10px; padding: 1px 6px;">Verified</span>
+                </div>
+              </div>
+              <div class="ai-pill-summary">
+                <strong>Illustrative Uncertainty Detection:</strong><br>
+                Plot area ink identified as faded. Automatically routed to human-assisted verification workflow.
+              </div>
+            </div>
+
+            <div class="inspector-card">
+              <div class="inspector-title">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                <span>Automated Validation Engine</span>
+              </div>
+              <div style="font-size: 11px; color: var(--color-secondary); display: flex; flex-direction: column; gap: 8px;">
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <span style="width: 6px; height: 6px; border-radius: 50%; background: #22C55E;"></span>
+                  <span>Predefined Business Rules: Checked</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <span style="width: 6px; height: 6px; border-radius: 50%; background: #22C55E;"></span>
+                  <span>Duplicate Detection: Verified Unique</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <span style="width: 6px; height: 6px; border-radius: 50%; background: #22C55E;"></span>
+                  <span>Master Database Verification: Cross-Checked</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <span style="width: 6px; height: 6px; border-radius: 50%; background: #FE551B;"></span>
+                  <span>Spatial GIS Link: Sample Khasra Located</span>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       PROBLEM / CHALLENGES SECTION
+       ========================================================================== -->
+  <section class="section" id="problem" style="background: #FAF8F6; border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
+    <div class="container">
+      <div class="section-header">
+        <div class="chip chip-accent">The Core Challenge</div>
+        <h2 class="headline-lg">Land records were not built for the digital age.</h2>
+        <p class="body-md">
+          Across India, historical land records continue to exist in the form of handwritten registers, scanned documents, cadastral maps, and legacy PDF files maintained across various administrative levels.
+        </p>
+      </div>
+
+      <div class="bento-grid" style="grid-template-columns: repeat(3, 1fr);">
+        <!-- Card 1 -->
+        <div class="card bento-card">
+          <div class="card-inner">
+            <div class="bento-icon-wrapper">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><line x1="9" y1="9" x2="15" y2="9"></line><line x1="9" y1="13" x2="15" y2="13"></line><line x1="9" y1="17" x2="11" y2="17"></line></svg>
+            </div>
+            <div class="bento-content">
+              <h4>Handwritten Registers & Faded Text</h4>
+              <p>
+                Decades-old physical registers frequently suffer from faded ink, damaged pages, and varying handwriting styles that impede standard transcription.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card bento-card">
+          <div class="card-inner">
+            <div class="bento-icon-wrapper">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+            </div>
+            <div class="bento-content">
+              <h4>Poor Image Quality & Scanned PDFs</h4>
+              <p>
+                Scanned legacy documents often contain noise, skew, low resolution, stains, and handwritten annotations that break conventional OCR engines.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card bento-card">
+          <div class="card-inner">
+            <div class="bento-icon-wrapper">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+            </div>
+            <div class="bento-content">
+              <h4>Multiple Indian Regional Languages</h4>
+              <p>
+                Land records exist across multiple regional scripts and languages with complex localized terminology, requiring specialized multilingual recognition.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="card bento-card">
+          <div class="card-inner">
+            <div class="bento-icon-wrapper">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+            </div>
+            <div class="bento-content">
+              <h4>Inconsistent Document Formats</h4>
+              <p>
+                Formats differ across states, tehsils, and historical eras—lacking standardized layouts for Khasra, Khatauni, Jamabandi, and deed documents.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="card bento-card">
+          <div class="card-inner">
+            <div class="bento-icon-wrapper">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><line x1="19" y1="8" x2="19" y2="14"></line><line x1="22" y1="11" x2="16" y2="11"></line></svg>
+            </div>
+            <div class="bento-content">
+              <h4>Manual Data Entry & Inconsistencies</h4>
+              <p>
+                Manual data entry is time-consuming, expensive, and error-prone, introducing data inconsistencies that affect decision-making and land governance.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="card bento-card">
+          <div class="card-inner">
+            <div class="bento-icon-wrapper">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg>
+            </div>
+            <div class="bento-content">
+              <h4>Ownership Verification & Disconnected Systems</h4>
+              <p>
+                The lack of standardized digital records creates hurdles in verifying ownership, resolving disputes, and integrating with modern land information systems.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       HOW THE SYSTEM WORKS (6-STAGE WORKFLOW)
+       ========================================================================== -->
+  <section class="section" id="workflow">
+    <div class="container">
+      <div class="section-header">
+        <div class="chip">Proposed Operational Architecture</div>
+        <h2 class="headline-lg">How the system works from intake to integration.</h2>
+        <p class="body-md">
+          A structured 6-stage lifecycle designed to convert unstandardized legacy land records into verified, modern digital datasets.
+        </p>
+      </div>
+
+      <!-- Pipeline Step Indicators -->
+      <div class="pipeline-flow-container">
+        <div class="pipeline-step-box">
+          <span class="pipeline-step-number">01</span>
+          <span class="pipeline-step-title">Upload</span>
+          <span class="pipeline-step-desc">Scanned PDFs & maps</span>
+        </div>
+        <div class="pipeline-step-box">
+          <span class="pipeline-step-number">02</span>
+          <span class="pipeline-step-title">AI Recognition</span>
+          <span class="pipeline-step-desc">OCR & Computer Vision</span>
+        </div>
+        <div class="pipeline-step-box">
+          <span class="pipeline-step-number">03</span>
+          <span class="pipeline-step-title">Extraction</span>
+          <span class="pipeline-step-desc">NLP/ML field mapping</span>
+        </div>
+        <div class="pipeline-step-box">
+          <span class="pipeline-step-number">04</span>
+          <span class="pipeline-step-title">Validation</span>
+          <span class="pipeline-step-desc">Business rules & checks</span>
+        </div>
+        <div class="pipeline-step-box">
+          <span class="pipeline-step-number">05</span>
+          <span class="pipeline-step-title">Verification</span>
+          <span class="pipeline-step-desc">Human-in-the-loop</span>
+        </div>
+        <div class="pipeline-step-box">
+          <span class="pipeline-step-number">06</span>
+          <span class="pipeline-step-title">Integration</span>
+          <span class="pipeline-step-desc">LRMS & GIS platforms</span>
+        </div>
+      </div>
+
+      <!-- Detailed 6-Stage Cards -->
+      <div class="workflow-grid-6">
+        <!-- Stage 01 -->
+        <div class="card bento-card">
+          <div class="card-inner">
+            <div class="chip chip-accent" style="margin-bottom: 10px;">STAGE 01</div>
+            <h3 class="headline-sm">Document Upload</h3>
+            <p class="body-sm" style="color: var(--color-secondary); margin-bottom: 12px;">
+              Upload scanned PDFs, images, handwritten registers, cadastral maps, and historical land-record documents through a user-friendly interface.
+            </p>
+            <div style="font-size: 11px; color: var(--color-muted);">
+              Input formats: Scanned PDF, TIFF, PNG, JPEG, Cadastral sheets
+            </div>
+          </div>
+        </div>
+
+        <!-- Stage 02 -->
+        <div class="card bento-card">
+          <div class="card-inner">
+            <div class="chip chip-accent" style="margin-bottom: 10px;">STAGE 02</div>
+            <h3 class="headline-sm">AI Recognition</h3>
+            <p class="body-sm" style="color: var(--color-secondary); margin-bottom: 12px;">
+              Advanced OCR and Computer Vision analyze document layouts, recognize printed and handwritten text in multiple Indian languages, and process visual features.
+            </p>
+            <div style="font-size: 11px; color: var(--color-muted);">
+              Capabilities: Multilingual character recognition, layout segmentation
+            </div>
+          </div>
+        </div>
+
+        <!-- Stage 03 -->
+        <div class="card bento-card">
+          <div class="card-inner">
+            <div class="chip chip-accent" style="margin-bottom: 10px;">STAGE 03</div>
+            <h3 class="headline-sm">Intelligent Extraction</h3>
+            <p class="body-sm" style="color: var(--color-secondary); margin-bottom: 12px;">
+              Natural Language Processing and Machine Learning classify recognized data into predefined fields such as landowner, survey number, khasra, khata, and plot area.
+            </p>
+            <div style="font-size: 11px; color: var(--color-muted);">
+              Output: Structured land attributes mapped to predefined schemas
+            </div>
+          </div>
+        </div>
+
+        <!-- Stage 04 -->
+        <div class="card bento-card">
+          <div class="card-inner">
+            <div class="chip chip-accent" style="margin-bottom: 10px;">STAGE 04</div>
+            <h3 class="headline-sm">Automated Validation</h3>
+            <p class="body-sm" style="color: var(--color-secondary); margin-bottom: 12px;">
+              The validation engine applies predefined business rules, performs cross-database verification against master databases, detects duplicates, and checks consistency.
+            </p>
+            <div style="font-size: 11px; color: var(--color-muted);">
+              Validation: Rule consistency, master database verification, duplicate checks
+            </div>
+          </div>
+        </div>
+
+        <!-- Stage 05 -->
+        <div class="card bento-card">
+          <div class="card-inner">
+            <div class="chip chip-accent" style="margin-bottom: 10px;">STAGE 05</div>
+            <h3 class="headline-sm">Human Verification</h3>
+            <p class="body-sm" style="color: var(--color-secondary); margin-bottom: 12px;">
+              Fields with low confidence or flagged ambiguities are automatically routed to revenue officials for manual review and human-assisted verification.
+            </p>
+            <div style="font-size: 11px; color: var(--color-muted);">
+              Governance: Official review queue, side-by-side image comparison
+            </div>
+          </div>
+        </div>
+
+        <!-- Stage 06 -->
+        <div class="card bento-card">
+          <div class="card-inner">
+            <div class="chip chip-accent" style="margin-bottom: 10px;">STAGE 06</div>
+            <h3 class="headline-sm">Digital Integration</h3>
+            <p class="body-sm" style="color: var(--color-secondary); margin-bottom: 12px;">
+              Verified, structured records are designed for proposed integration with LRMS, DILRMP databases, GIS platforms, cadastral maps, and other government databases via APIs.
+            </p>
+            <div style="font-size: 11px; color: var(--color-muted);">
+              Proposed Integration: RESTful APIs, GraphQL, GIS spatial integration
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       CORE FEATURES SECTION (Directly from Study Scope)
+       ========================================================================== -->
+  <section class="section" id="features" style="background: #FCFBFA; border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
+    <div class="container">
+      <div class="section-header">
+        <div class="chip">Core System Capabilities</div>
+        <h2 class="headline-lg">Features designed for intelligent land governance.</h2>
+        <p class="body-md">
+          Key capabilities outlined in the project study to automate legacy document extraction while maintaining data integrity and administrative transparency.
+        </p>
+      </div>
+
+      <div class="bento-grid">
+        <!-- Feature 1 -->
+        <div class="card bento-card bento-card-normal">
+          <div class="card-inner">
+            <div class="bento-icon-wrapper">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+            </div>
+            <div class="bento-content">
+              <h4>Multilingual Recognition</h4>
+              <p>
+                Support for printed and handwritten document recognition across major Indian languages and regional revenue scripts.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="card bento-card bento-card-normal">
+          <div class="card-inner">
+            <div class="bento-icon-wrapper">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            </div>
+            <div class="bento-content">
+              <h4>Automatic Data Extraction</h4>
+              <p>
+                Automatically extract key land record attributes from scanned PDFs, handwritten registers, maps, and historical deeds.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="card bento-card bento-card-normal">
+          <div class="card-inner">
+            <div class="bento-icon-wrapper">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            </div>
+            <div class="bento-content">
+              <h4>Intelligent Classification</h4>
+              <p>
+                Classify extracted textual and tabular information into predefined standardized land-record fields.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="card bento-card bento-card-normal">
+          <div class="card-inner">
+            <div class="bento-icon-wrapper">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            </div>
+            <div class="bento-content">
+              <h4>Automated Validation</h4>
+              <p>
+                Validate extracted data using predefined business rules, cross-database verification, and duplicate detection.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="card bento-card bento-card-normal">
+          <div class="card-inner">
+            <div class="bento-icon-wrapper">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            </div>
+            <div class="bento-content">
+              <h4>Confidence Scoring</h4>
+              <p>
+                Assess extraction confidence for each field with automatic identification of uncertain or damaged values.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="card bento-card bento-card-normal">
+          <div class="card-inner">
+            <div class="bento-icon-wrapper">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            </div>
+            <div class="bento-content">
+              <h4>Human-Assisted Verification</h4>
+              <p>
+                Dedicated workflow allowing revenue officials to manually verify and confirm low-confidence records.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 7 -->
+        <div class="card bento-card bento-card-normal">
+          <div class="card-inner">
+            <div class="bento-icon-wrapper">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg>
+            </div>
+            <div class="bento-content">
+              <h4>GIS & Database Integration</h4>
+              <p>
+                Designed for proposed integration with existing Land Records Management Systems (LRMS), DILRMP databases, GIS platforms, and cadastral maps.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 8 -->
+        <div class="card bento-card bento-card-normal">
+          <div class="card-inner">
+            <div class="bento-icon-wrapper">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            </div>
+            <div class="bento-content">
+              <h4>Secure Repository & Audit Trail</h4>
+              <p>
+                Maintain document metadata, digital repository records, audit trails, and role-based access control.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       AI-POWERED DOCUMENT INTELLIGENCE (TECHNICAL APPROACH)
+       ========================================================================== -->
+  <section class="section" id="ai-approach">
+    <div class="container">
+      <div class="section-header">
+        <div class="chip chip-accent">Technical Approach</div>
+        <h2 class="headline-lg">AI-Powered Document Intelligence</h2>
+        <p class="body-md">
+          A multi-tiered artificial intelligence pipeline designed to handle complex historical land records from document intake to validated digital output.
+        </p>
+      </div>
+
+      <!-- Pipeline Transformation Diagram -->
+      <div style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-xl); padding: var(--space-xl); margin-bottom: var(--space-3xl); box-shadow: var(--shadow-sm);">
+        <div style="font-size: 11px; font-weight: 700; color: var(--color-tertiary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; text-align: center;">
+          Document Transformation Pipeline
+        </div>
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; font-size: 12px; font-weight: 600; color: var(--color-primary); text-align: center;">
+          <span style="background: var(--color-neutral); padding: 6px 12px; border-radius: var(--radius-md);">Legacy Document</span>
+          <span style="color: var(--color-tertiary);">→</span>
+          <span style="background: var(--color-neutral); padding: 6px 12px; border-radius: var(--radius-md);">OCR</span>
+          <span style="color: var(--color-tertiary);">→</span>
+          <span style="background: var(--color-neutral); padding: 6px 12px; border-radius: var(--radius-md);">Computer Vision</span>
+          <span style="color: var(--color-tertiary);">→</span>
+          <span style="background: var(--color-neutral); padding: 6px 12px; border-radius: var(--radius-md);">NLP / ML</span>
+          <span style="color: var(--color-tertiary);">→</span>
+          <span style="background: var(--color-neutral); padding: 6px 12px; border-radius: var(--radius-md);">Structured Data</span>
+          <span style="color: var(--color-tertiary);">→</span>
+          <span style="background: var(--color-neutral); padding: 6px 12px; border-radius: var(--radius-md);">Validation</span>
+          <span style="color: var(--color-tertiary);">→</span>
+          <span style="background: var(--color-neutral); padding: 6px 12px; border-radius: var(--radius-md);">Human Verification</span>
+          <span style="color: var(--color-tertiary);">→</span>
+          <span style="background: #ECFDF5; color: #047857; border: 1px solid #A7F3D0; padding: 6px 12px; border-radius: var(--radius-md);">Digital Record</span>
+        </div>
+      </div>
+
+      <!-- 4 Technical Pillars -->
+      <div class="feature-split">
+        <div class="feature-text-block">
+          <div class="chip chip-accent">01 • OPTICAL CHARACTER RECOGNITION</div>
+          <h3 class="headline-md">Extracting text from scanned and printed records.</h3>
+          <p class="body-md">
+            The OCR engine processes scanned historical registers, deeds, and revenue sheets across multiple Indian languages, converting raw pixel imagery into machine-readable text while accounting for regional typography.
+          </p>
+          <ul class="feature-checklist">
+            <li class="feature-checklist-item">
+              <div class="check-icon">✓</div>
+              <span>Recognition of printed and handwritten characters</span>
+            </li>
+            <li class="feature-checklist-item">
+              <div class="check-icon">✓</div>
+              <span>Support for regional Indian languages and revenue scripts</span>
+            </li>
+            <li class="feature-checklist-item">
+              <div class="check-icon">✓</div>
+              <span>Preprocessing filters for faded ink, contrast enhancement, and deskewing</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="feature-visual-panel">
+          <div style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 20px; box-shadow: var(--shadow-sm);">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 11px; color: var(--color-muted);">
+              <span>OCR LAYER INSPECTION (DEMO SAMPLE)</span>
+              <span class="chip" style="font-size: 9px; padding: 2px 6px;">MULTILINGUAL ENGINE</span>
+            </div>
+            <div style="background: #FAF8F6; padding: 14px; border-radius: var(--radius-md); border: 1px solid var(--color-border); font-family: var(--font-family-mono); font-size: 11px; line-height: 20px;">
+              <span style="color: var(--color-muted);">// Illustrative text recognition buffer (Mock Data):</span><br>
+              <span style="color: #047857;">[OCR_DETECT]</span> Script: Multilingual Regional Character Recognition<br>
+              <span style="color: #047857;">[OCR_TEXT]</span> Sample Village, Sample Tehsil, Sample District<br>
+              <span style="color: #047857;">[OCR_TEXT]</span> Survey No: 101, Khasra: 101/1, Area: 1.25 Hectares<br>
+              <span style="color: #047857;">[OCR_CONFIDENCE]</span> Characters processed: Qualitative Confidence Assigned
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="feature-split reverse" style="margin-top: var(--space-4xl);">
+        <div class="feature-text-block">
+          <div class="chip chip-accent">02 • COMPUTER VISION & LAYOUT ANALYSIS</div>
+          <h3 class="headline-md">Segmenting tables, cadastral boundaries, and document layouts.</h3>
+          <p class="body-md">
+            Computer vision techniques (using suggested frameworks such as OpenCV, Detectron2, and YOLO) identify document structures, bounding boxes for revenue tables, seal locations, and boundary lines in cadastral map sheets.
+          </p>
+          <ul class="feature-checklist">
+            <li class="feature-checklist-item">
+              <div class="check-icon">✓</div>
+              <span>Automated table and column boundary detection</span>
+            </li>
+            <li class="feature-checklist-item">
+              <div class="check-icon">✓</div>
+              <span>Processing visual layout structures and map coordinates</span>
+            </li>
+            <li class="feature-checklist-item">
+              <div class="check-icon">✓</div>
+              <span>Cadastral map parcel boundary segmentation</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="feature-visual-panel">
+          <div style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 20px; box-shadow: var(--shadow-sm);">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 11px; color: var(--color-muted);">
+              <span>COMPUTER VISION SEGMENTATION (DEMO)</span>
+              <span class="chip" style="font-size: 9px; padding: 2px 6px;">LAYOUT DETECTION</span>
+            </div>
+            <div style="background: #FAF8F6; padding: 14px; border-radius: var(--radius-md); border: 1px solid var(--color-border); font-family: var(--font-family-mono); font-size: 11px; line-height: 20px;">
+              <span style="color: var(--color-muted);">// Vision model bounding box detections (Illustrative):</span><br>
+              <span style="color: #2563EB;">[BOUNDING_BOX]</span> Table Header Segment: (x:40, y:80, w:700, h:32)<br>
+              <span style="color: #2563EB;">[BOUNDING_BOX]</span> Survey Column Segment: (x:40, y:112, w:100, h:400)<br>
+              <span style="color: #2563EB;">[BOUNDING_BOX]</span> Ownership Column Segment: (x:140, y:112, w:260, h:400)<br>
+              <span style="color: #2563EB;">[MAP_FEATURE]</span> Cadastral Boundary Line Segment Detected
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="feature-split" style="margin-top: var(--space-4xl);">
+        <div class="feature-text-block">
+          <div class="chip chip-accent">03 • NLP & MACHINE LEARNING</div>
+          <h3 class="headline-md">Classifying unstructured text into predefined fields.</h3>
+          <p class="body-md">
+            Using Natural Language Processing (such as spaCy, Hugging Face Transformers, and the Indic NLP Library), the platform understands revenue terminology, extracts entity relations, and intelligently classifies data into standardized land attributes.
+          </p>
+          <ul class="feature-checklist">
+            <li class="feature-checklist-item">
+              <div class="check-icon">✓</div>
+              <span>Entity recognition for landowners, relatives, tehsils, and plots</span>
+            </li>
+            <li class="feature-checklist-item">
+              <div class="check-icon">✓</div>
+              <span>Classification into predefined land record attributes</span>
+            </li>
+            <li class="feature-checklist-item">
+              <div class="check-icon">✓</div>
+              <span>AI-driven learning mechanism that improves extraction accuracy over time</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="feature-visual-panel">
+          <div style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 20px; box-shadow: var(--shadow-sm);">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 11px; color: var(--color-muted);">
+              <span>NLP ENTITY CLASSIFIER (DEMO)</span>
+              <span class="chip" style="font-size: 9px; padding: 2px 6px;">INDIC NLP</span>
+            </div>
+            <div style="background: #FAF8F6; padding: 14px; border-radius: var(--radius-md); border: 1px solid var(--color-border); font-family: var(--font-family-mono); font-size: 11px; line-height: 20px;">
+              <span style="color: var(--color-muted);">// NLP classification output (Illustrative Sample):</span><br>
+              <span style="color: #7C3AED;">[ENTITY_OWNER]</span> 'Sample Landowner Name' → Landowner Details<br>
+              <span style="color: #7C3AED;">[ENTITY_SURVEY]</span> '101' → Survey Number<br>
+              <span style="color: #7C3AED;">[ENTITY_KHASRA]</span> '101/1' → Khasra Number<br>
+              <span style="color: #7C3AED;">[ENTITY_MUTATION]</span> 'Entry 101' → Mutation Records
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       INTERACTIVE SANDBOX & PLAYGROUND
+       ========================================================================== -->
+  <section class="showcase-section" id="showcase">
+    <div class="container">
+      <div class="section-header">
+        <div class="chip chip-accent">Interactive System Simulator</div>
+        <h2 class="headline-lg">Experience how the proposed system processes records.</h2>
+        <p class="body-md">
+          Explore interactive demonstrations of the platform's core operational capabilities: field extraction, automated business-rule validation, and cadastral spatial mapping. <em>(All samples are illustrative fictional data).</em>
+        </p>
+      </div>
+
+      <!-- Tab Navigation -->
+      <div class="showcase-tabs-nav" role="tablist">
+        <button type="button" class="showcase-tab-btn is-active" data-tab="tab-api" role="tab" aria-selected="true">
+          Field Extraction Sandbox
+        </button>
+        <button type="button" class="showcase-tab-btn" data-tab="tab-ai" role="tab" aria-selected="false">
+          Automated Rule Validation
+        </button>
+        <button type="button" class="showcase-tab-btn" data-tab="tab-git" role="tab" aria-selected="false">
+          GIS Cadastral Linking
+        </button>
+      </div>
+
+      <!-- Tab 1: Field Extraction Sandbox -->
+      <div class="showcase-pane is-active" id="tab-api" role="tabpanel">
+        <div class="showcase-pane-info">
+          <div class="chip" style="margin-bottom: 12px;">Automated Processing</div>
+          <h3 class="headline-sm">Simulate OCR and field classification.</h3>
+          <p class="body-sm">
+            Execute a simulated recognition pass on a sample document. The system analyzes raw text characters, classifies attributes into predefined fields, and generates confidence assessments.
+          </p>
+          <div style="display: flex; gap: 12px; align-items: center;">
+            <a href="#land-data" class="btn btn-primary btn-sm">View All 12 Fields</a>
+            <span style="font-size: 12px; color: var(--color-muted);">Demonstration Simulator</span>
+          </div>
+        </div>
+
+        <div class="showcase-pane-interactive">
+          <div class="interactive-header">
+            <div class="api-endpoint-pill">
+              <span class="method-tag">AI PIPELINE</span>
+              <span>/extract/record/Sample_Document_01.pdf</span>
+            </div>
+            <button type="button" class="run-query-btn" id="runApiTestBtn">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              <span>Run Extraction Pass</span>
+            </button>
+          </div>
+
+          <div class="interactive-console" id="apiConsoleOutput">
+<span class="c-cmt">// Click 'Run Extraction Pass' to simulate recognition and classification...</span>
+{
+  <span class="c-prop">"document_id"</span>: <span class="c-str">"DEMO-SAMPLE-RECORD-01"</span>,
+  <span class="c-prop">"document_type"</span>: <span class="c-str">"Sample Land Record Register (Illustrative Mock Data)"</span>,
+  <span class="c-prop">"recognized_script"</span>: <span class="c-str">"Multilingual Indian Script (Demonstration)"</span>,
+  <span class="c-prop">"extracted_fields"</span>: {
+    <span class="c-prop">"landowner_details"</span>: <span class="c-str">"Sample Landowner Name (Demonstration)"</span>,
+    <span class="c-prop">"survey_number"</span>: <span class="c-str">"Sample Survey 101"</span>,
+    <span class="c-prop">"khasra_number"</span>: <span class="c-str">"Sample Khasra 101/1"</span>,
+    <span class="c-prop">"khata_number"</span>: <span class="c-str">"Sample Khata 45"</span>,
+    <span class="c-prop">"plot_area"</span>: <span class="c-str">"1.25 Hectares (Sample)"</span>,
+    <span class="c-prop">"village"</span>: <span class="c-str">"Sample Village"</span>,
+    <span class="c-prop">"tehsil"</span>: <span class="c-str">"Sample Tehsil"</span>,
+    <span class="c-prop">"district"</span>: <span class="c-str">"Sample District"</span>,
+    <span class="c-prop">"land_classification"</span>: <span class="c-str">"Agricultural (Sample)"</span>,
+    <span class="c-prop">"ownership_details"</span>: <span class="c-str">"Single Title Holder (Sample)"</span>,
+    <span class="c-prop">"mutation_records"</span>: <span class="c-str">"Sample Mutation Record"</span>,
+    <span class="c-prop">"registration_information"</span>: <span class="c-str">"Sample Registration Entry"</span>
+  },
+  <span class="c-prop">"confidence_assessment"</span>: {
+    <span class="c-prop">"overall_status"</span>: <span class="c-str">"High Confidence"</span>,
+    <span class="c-prop">"flagged_fields"</span>: [<span class="c-str">"plot_area (identified as uncertain: faded ink)"</span>]
+  },
+  <span class="c-prop">"notice"</span>: <span class="c-str">"Illustrative fictional UI data for demonstration only"</span>
+}</div>
+        </div>
+      </div>
+
+      <!-- Tab 2: Automated Rule Validation -->
+      <div class="showcase-pane" id="tab-ai" role="tabpanel">
+        <div class="showcase-pane-info">
+          <div class="chip" style="margin-bottom: 12px;">Validation Engine</div>
+          <h3 class="headline-sm">Business rules, duplicates & master database checks.</h3>
+          <p class="body-sm">
+            Before any record is approved, the validation engine checks consistency against master land registries, detects potential duplicates, and applies predefined business rules.
+          </p>
+          <div style="display: flex; gap: 12px; align-items: center;">
+            <a href="#features" class="btn btn-primary btn-sm">Explore Validation</a>
+            <span style="font-size: 12px; color: var(--color-muted);">Cross-Database Verification</span>
+          </div>
+        </div>
+
+        <div class="showcase-pane-interactive">
+          <div class="interactive-header">
+            <span style="font-family: var(--font-family-mono); font-size: 11px; color: #A8A29E;">VALIDATION ENGINE RULES EVALUATION (DEMO)</span>
+            <span class="chip" style="font-size: 10px; background: #2A2724; color: #34D399;">STATUS: VALIDATED</span>
+          </div>
+
+          <div class="interactive-console">
+<span class="c-kw">EVALUATION:</span> Sample Record ID #DEMO-SAMPLE-RECORD-01 against Predefined Rules:
+
+1. <span class="c-str">✓ Master Database Verification:</span> Sample Village / Sample Tehsil matched in LRMS database
+2. <span class="c-str">✓ Duplicate Detection:</span> No existing duplicate entry for Sample Khasra 101/1 found
+3. <span class="c-str">✓ Business Rule Check:</span> Sample Khata ownership matches title holder identification
+4. <span class="c-str">⚠ Confidence Threshold:</span> Plot Area identified as uncertain → Routed for human verification
+5. <span class="c-str">✓ Audit Trail:</span> Document metadata and inspection session logged
+
+<span class="c-cmt">// Action: Routed to Human-in-the-Loop Revenue Official Verification Queue</span></div>
+        </div>
+      </div>
+
+      <!-- Tab 3: GIS Cadastral Linking -->
+      <div class="showcase-pane" id="tab-git" role="tabpanel">
+        <div class="showcase-pane-info">
+          <div class="chip" style="margin-bottom: 12px;">Spatial Cadastral Integration</div>
+          <h3 class="headline-sm">Connecting textual records with GIS maps.</h3>
+          <p class="body-sm">
+            Once validated, extracted Khasra and Survey numbers link directly to spatial cadastral map sheets and GIS platforms (GeoServer / Leaflet / QGIS), enabling visual boundary verification.
+          </p>
+          <div style="display: flex; gap: 12px; align-items: center;">
+            <a href="#gis" class="btn btn-primary btn-sm">View GIS Architecture</a>
+            <span style="font-size: 12px; color: var(--color-muted);">PostGIS & GeoServer Ready</span>
+          </div>
+        </div>
+
+        <div class="showcase-pane-interactive">
+          <div class="interactive-header">
+            <span style="font-family: var(--font-family-mono); font-size: 11px; color: #A8A29E;">CADASTRAL SPATIAL MAPPING (DEMO)</span>
+            <span class="chip" style="font-size: 10px; background: #2A2724; color: #38BDF8;">LAYER: KHASRA VECTOR</span>
+          </div>
+
+          <div class="interactive-console">
+<span class="c-fn">QUERY:</span> SELECT parcel_geom FROM cadastral_parcels WHERE survey_no = 'Sample-101' AND khasra_no = 'Sample-101/1';
+<span class="c-str">✓</span> Found vector polygon in PostGIS spatial repository
+<span class="c-str">✓</span> Mapped Area: 1.25 Hectares (Boundary coordinates match survey record)
+<span class="c-str">✓</span> Neighboring Parcels: Sample Khasra 100 (North), Sample Khasra 101/2 (South)
+<span class="c-str">✓</span> Cadastral Sheet Ref: Sample_Cadastral_Sheet_01.tiff
+
+<span class="c-cmt">// Designed for proposed integration with Land Records Management Systems (LRMS)</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       LAND RECORD DATA SECTION: THE 12 PREDEFINED FIELDS (EXACTLY FROM PDF)
+       ========================================================================== -->
+  <section class="section" id="land-data">
+    <div class="container">
+      <div class="section-header">
+        <div class="chip">Predefined Data Schema</div>
+        <h2 class="headline-lg">12 Predefined Land-Record Fields</h2>
+        <p class="body-md">
+          The proposed system automatically extracts and classifies information into the twelve predefined fields explicitly specified in the project study document.
+        </p>
+      </div>
+
+      <div class="bento-grid" style="grid-template-columns: repeat(4, 1fr);">
+        <!-- Field 1 -->
+        <div class="card bento-card">
+          <div class="card-inner">
+            <div class="tech-card-badge">FIELD 01</div>
+            <h4 style="margin-bottom: 6px;">Landowner Details</h4>
+            <p style="font-size: 12px; color: var(--color-secondary);">
+              Name and details of title holders, co-sharers, parentage, and legal identification references.
+            </p>
+          </div>
+        </div>
+
+        <!-- Field 2 -->
+        <div class="card bento-card">
+          <div class="card-inner">
+            <div class="tech-card-badge">FIELD 02</div>
+            <h4 style="margin-bottom: 6px;">Survey Number</h4>
+            <p style="font-size: 12px; color: var(--color-secondary);">
+              Official revenue survey identification assigned during administrative land surveys.
+            </p>
+          </div>
+        </div>
+
+        <!-- Field 3 -->
+        <div class="card bento-card">
+          <div class="card-inner">
+            <div class="tech-card-badge">FIELD 03</div>
+            <h4 style="margin-bottom: 6px;">Khasra Number</h4>
+            <p style="font-size: 12px; color: var(--color-secondary);">
+              Specific plot or parcel identifier representing land subdivisions within the revenue boundary.
+            </p>
+          </div>
+        </div>
+
+        <!-- Field 4 -->
+        <div class="card bento-card">
+          <div class="card-inner">
+            <div class="tech-card-badge">FIELD 04</div>
+            <h4 style="margin-bottom: 6px;">Khata Number</h4>
+            <p style="font-size: 12px; color: var(--color-secondary);">
+              Account ledger identifier grouping landholdings belonging to a single title holder or family unit.
+            </p>
+          </div>
+        </div>
+
+        <!-- Field 5 -->
+        <div class="card bento-card">
+          <div class="card-inner">
+            <div class="tech-card-badge">FIELD 05</div>
+            <h4 style="margin-bottom: 6px;">Plot Area</h4>
+            <p style="font-size: 12px; color: var(--color-secondary);">
+              Land measurement recorded in standardized metric units and legacy regional measurement units.
+            </p>
+          </div>
+        </div>
+
+        <!-- Field 6 -->
+        <div class="card bento-card">
+          <div class="card-inner">
+            <div class="tech-card-badge">FIELD 06</div>
+            <h4 style="margin-bottom: 6px;">Village</h4>
+            <p style="font-size: 12px; color: var(--color-secondary);">
+              Revenue village (Mauza) jurisdiction indicating the local administrative origin of the parcel.
+            </p>
+          </div>
+        </div>
+
+        <!-- Field 7 -->
+        <div class="card bento-card">
+          <div class="card-inner">
+            <div class="tech-card-badge">FIELD 07</div>
+            <h4 style="margin-bottom: 6px;">Tehsil</h4>
+            <p style="font-size: 12px; color: var(--color-secondary);">
+              Sub-district administrative revenue division (Taluka/Tehsil) overseeing the village records.
+            </p>
+          </div>
+        </div>
+
+        <!-- Field 8 -->
+        <div class="card bento-card">
+          <div class="card-inner">
+            <div class="tech-card-badge">FIELD 08</div>
+            <h4 style="margin-bottom: 6px;">District</h4>
+            <p style="font-size: 12px; color: var(--color-secondary);">
+              Primary district revenue jurisdiction encompassing the sub-district administrative boundaries.
+            </p>
+          </div>
+        </div>
+
+        <!-- Field 9 -->
+        <div class="card bento-card">
+          <div class="card-inner">
+            <div class="tech-card-badge">FIELD 09</div>
+            <h4 style="margin-bottom: 6px;">Land Classification</h4>
+            <p style="font-size: 12px; color: var(--color-secondary);">
+              Official categorization of the parcel (e.g. agricultural, irrigated, residential, or commercial).
+            </p>
+          </div>
+        </div>
+
+        <!-- Field 10 -->
+        <div class="card bento-card">
+          <div class="card-inner">
+            <div class="tech-card-badge">FIELD 10</div>
+            <h4 style="margin-bottom: 6px;">Ownership Details</h4>
+            <p style="font-size: 12px; color: var(--color-secondary);">
+              Tenure status, occupant classification, shareholding proportions, and registered rights.
+            </p>
+          </div>
+        </div>
+
+        <!-- Field 11 -->
+        <div class="card bento-card">
+          <div class="card-inner">
+            <div class="tech-card-badge">FIELD 11</div>
+            <h4 style="margin-bottom: 6px;">Mutation Records</h4>
+            <p style="font-size: 12px; color: var(--color-secondary);">
+              Historical record of title transfers, inheritance, succession entries, partitions, and amendments.
+            </p>
+          </div>
+        </div>
+
+        <!-- Field 12 -->
+        <div class="card bento-card">
+          <div class="card-inner">
+            <div class="tech-card-badge">FIELD 12</div>
+            <h4 style="margin-bottom: 6px;">Registration Information</h4>
+            <p style="font-size: 12px; color: var(--color-secondary);">
+              Deed registration references, document numbers, dates, and sub-registrar office details.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       VALIDATION + HUMAN-IN-THE-LOOP SECTION
+       ========================================================================== -->
+  <section class="section" style="background: #FAF8F6; border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
+    <div class="container">
+      <div class="section-header">
+        <div class="chip chip-accent">Human-Assisted Verification</div>
+        <h2 class="headline-lg">AI handles the scale. Humans handle the uncertainty.</h2>
+        <p class="body-md">
+          The proposed system does not blindly accept every extracted value. It assesses confidence, detects potential discrepancies, and routes uncertain fields for manual verification.
+        </p>
+      </div>
+
+      <div class="workflow-grid-6" style="grid-template-columns: repeat(3, 1fr);">
+        <!-- Card 1 -->
+        <div class="card bento-card">
+          <div class="card-inner">
+            <div class="bento-icon-wrapper">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            </div>
+            <div class="bento-content">
+              <h4>Automated Validation</h4>
+              <p>
+                Predefined business rules, cross-database verification against master registries, and duplicate detection check consistency across all extracted records.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card bento-card">
+          <div class="card-inner">
+            <div class="bento-icon-wrapper">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            </div>
+            <div class="bento-content">
+              <h4>Confidence Scoring & Flagging</h4>
+              <p>
+                Every extracted field receives a qualitative confidence evaluation. Uncertain characters, ambiguous handwriting, or faded text are automatically flagged.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card bento-card">
+          <div class="card-inner">
+            <div class="bento-icon-wrapper">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            </div>
+            <div class="bento-content">
+              <h4>Human-Assisted Verification</h4>
+              <p>
+                Revenue officials review flagged values in an intuitive side-by-side interface showing original scans and extracted data, ensuring full administrative accountability.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       GIS & CADASTRAL MAPPING SECTION
+       ========================================================================== -->
+  <section class="section" id="gis">
+    <div class="container">
+      <div class="feature-split">
+        <div class="feature-text-block">
+          <div class="chip chip-accent">SPATIAL INTEGRATION</div>
+          <h2 class="headline-md">From Documents to Maps.</h2>
+          <p class="body-md">
+            Validated textual land records are designed for proposed integration with GIS platforms, cadastral maps, Land Records Management Systems (LRMS), and DILRMP databases.
+          </p>
+          <ul class="feature-checklist">
+            <li class="feature-checklist-item">
+              <div class="check-icon">✓</div>
+              <span>Link survey and khasra numbers directly to vector cadastral parcel boundaries</span>
+            </li>
+            <li class="feature-checklist-item">
+              <div class="check-icon">✓</div>
+              <span>Integration with proposed GIS platforms: GeoServer, OpenLayers, Leaflet, and QGIS</span>
+            </li>
+            <li class="feature-checklist-item">
+              <div class="check-icon">✓</div>
+              <span>Spatial database support via PostgreSQL with PostGIS</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="feature-visual-panel">
+          <div class="cadastral-map-box">
+            <div class="cadastral-toolbar">
+              <div style="font-weight: 700; color: var(--color-primary); display: flex; align-items: center; gap: 6px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon></svg>
+                <span>Illustrative Cadastral Map Viewer (Sample Demonstration Data)</span>
+              </div>
+              <div class="cadastral-layers">
+                <span class="cadastral-layer-pill active">Sample Parcel 101/1</span>
+                <span class="cadastral-layer-pill">Roads</span>
+                <span class="cadastral-layer-pill">Boundaries</span>
+              </div>
+            </div>
+
+            <!-- Conceptual Cadastral Vector Map SVG -->
+            <svg class="cadastral-svg-canvas" viewBox="0 0 500 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="500" height="240" fill="#F8FAFC"/>
+              <!-- Background cadastral grid -->
+              <path d="M0 40H500M0 80H500M0 120H500M0 160H500M0 200H500" stroke="#E2E8F0" stroke-width="1"/>
+              <path d="M50 0V240M100 0V240M150 0V240M200 0V240M250 0V240M300 0V240M350 0V240M400 0V240M450 0V240" stroke="#E2E8F0" stroke-width="1"/>
+              
+              <!-- Surrounding Parcels -->
+              <polygon points="60,30 180,20 190,90 70,100" fill="#EDF2F7" stroke="#CBD5E1" stroke-width="1.5"/>
+              <text x="95" y="65" font-size="10" font-family="sans-serif" fill="#64748B">Sample Parcel 100</text>
+              
+              <polygon points="190,90 320,80 340,160 200,170" fill="#EDF2F7" stroke="#CBD5E1" stroke-width="1.5"/>
+              <text x="230" y="130" font-size="10" font-family="sans-serif" fill="#64748B">Sample Parcel 101/2</text>
+
+              <polygon points="320,80 440,70 450,150 340,160" fill="#EDF2F7" stroke="#CBD5E1" stroke-width="1.5"/>
+              <text x="360" y="120" font-size="10" font-family="sans-serif" fill="#64748B">Sample Parcel 102</text>
+
+              <!-- Highlighted Active Parcel (Sample Khasra 101/1) -->
+              <polygon points="70,100 190,90 200,170 80,180" fill="#FFF7ED" stroke="#FE551B" stroke-width="2.5"/>
+              <text x="90" y="135" font-size="11" font-weight="bold" font-family="sans-serif" fill="#C2410C">Sample Parcel 101/1</text>
+              <text x="90" y="150" font-size="9" font-family="sans-serif" fill="#EA580C">1.25 Hectares (Sample)</text>
+
+              <!-- Adjacent Parcel -->
+              <polygon points="80,180 200,170 210,230 90,235" fill="#EDF2F7" stroke="#CBD5E1" stroke-width="1.5"/>
+              <text x="110" y="210" font-size="10" font-family="sans-serif" fill="#64748B">Sample Parcel 101/3</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       DIGITIZATION MONITORING DASHBOARD SECTION
+       ========================================================================== -->
+  <section class="section" id="dashboard" style="background: #FCFBFA; border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
+    <div class="container">
+      <div class="section-header">
+        <div class="chip">Oversight & Monitoring</div>
+        <h2 class="headline-lg">Digitization Monitoring Dashboards</h2>
+        <p class="body-md">
+          Interactive administrative dashboards displaying key monitoring categories outlined in the study to track progress and validation quality.
+        </p>
+      </div>
+
+      <div class="dashboard-categories-grid">
+        <!-- Cat 1 -->
+        <div class="dashboard-cat-card">
+          <div class="dashboard-cat-header">
+            <span class="dashboard-cat-title">Documents Processed</span>
+            <span class="chip" style="font-size: 10px;">VOLUME</span>
+          </div>
+          <p class="dashboard-cat-scope">
+            Track intake volume across legacy registers, maps, scanned PDFs, and historical mutation records.
+          </p>
+        </div>
+
+        <!-- Cat 2 -->
+        <div class="dashboard-cat-card">
+          <div class="dashboard-cat-header">
+            <span class="dashboard-cat-title">Extraction Accuracy</span>
+            <span class="chip" style="font-size: 10px;">AI QUALITY</span>
+          </div>
+          <p class="dashboard-cat-scope">
+            Monitor model confidence assessments, character recognition fidelity, and field extraction metrics.
+          </p>
+        </div>
+
+        <!-- Cat 3 -->
+        <div class="dashboard-cat-card">
+          <div class="dashboard-cat-header">
+            <span class="dashboard-cat-title">Validation Status</span>
+            <span class="chip" style="font-size: 10px;">RULES</span>
+          </div>
+          <p class="dashboard-cat-scope">
+            Evaluate pass/fail rates for predefined business rules, master database matches, and duplicate checks.
+          </p>
+        </div>
+
+        <!-- Cat 4 -->
+        <div class="dashboard-cat-card">
+          <div class="dashboard-cat-header">
+            <span class="dashboard-cat-title">Pending Verification</span>
+            <span class="chip" style="font-size: 10px;">HUMAN REVIEW</span>
+          </div>
+          <p class="dashboard-cat-scope">
+            Review workload backlogs and pending verification queues assigned to revenue officials.
+          </p>
+        </div>
+
+        <!-- Cat 5 -->
+        <div class="dashboard-cat-card">
+          <div class="dashboard-cat-header">
+            <span class="dashboard-cat-title">Error Statistics</span>
+            <span class="chip" style="font-size: 10px;">ANOMALIES</span>
+          </div>
+          <p class="dashboard-cat-scope">
+            Identify common failure modes such as severe ink fading, torn pages, and missing cadastral references.
+          </p>
+        </div>
+
+        <!-- Cat 6 -->
+        <div class="dashboard-cat-card">
+          <div class="dashboard-cat-header">
+            <span class="dashboard-cat-title">State-Wise Progress</span>
+            <span class="chip" style="font-size: 10px;">STATE LEVEL</span>
+          </div>
+          <p class="dashboard-cat-scope">
+            Comparative progress tracking across state land-administration programs and modernization initiatives.
+          </p>
+        </div>
+
+        <!-- Cat 7 -->
+        <div class="dashboard-cat-card">
+          <div class="dashboard-cat-header">
+            <span class="dashboard-cat-title">District-Wise Progress</span>
+            <span class="chip" style="font-size: 10px;">DISTRICT LEVEL</span>
+          </div>
+          <p class="dashboard-cat-scope">
+            Granular tracking of digitization completion across tehsils, circles, and village revenue units.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       STAKEHOLDERS SECTION
+       ========================================================================== -->
+  <section class="section" id="stakeholders">
+    <div class="container">
+      <div class="section-header">
+        <div class="chip">Stakeholder Ecosystem</div>
+        <h2 class="headline-lg">Serving key stakeholders across land administration.</h2>
+        <p class="body-md">
+          The proposed system is designed to provide actionable value across the entire spectrum of administrative bodies, researchers, and citizens.
+        </p>
+      </div>
+
+      <div class="stakeholders-grid">
+        <!-- Stakeholder 1 -->
+        <div class="stakeholder-card">
+          <div class="stakeholder-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+          </div>
+          <h4 class="stakeholder-title">Revenue Departments</h4>
+          <p class="stakeholder-desc">
+            Streamlining record maintenance, tax assessment, mutation tracking, and land title records.
+          </p>
+        </div>
+
+        <!-- Stakeholder 2 -->
+        <div class="stakeholder-card">
+          <div class="stakeholder-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+          </div>
+          <h4 class="stakeholder-title">Land Record Offices</h4>
+          <p class="stakeholder-desc">
+            Digitizing paper registries, indexing archival records, and eliminating manual transcription backlogs.
+          </p>
+        </div>
+
+        <!-- Stakeholder 3 -->
+        <div class="stakeholder-card">
+          <div class="stakeholder-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon></svg>
+          </div>
+          <h4 class="stakeholder-title">Survey Departments</h4>
+          <p class="stakeholder-desc">
+            Reconciling spatial cadastral maps with written title deeds and survey settlements.
+          </p>
+        </div>
+
+        <!-- Stakeholder 4 -->
+        <div class="stakeholder-card">
+          <div class="stakeholder-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+          </div>
+          <h4 class="stakeholder-title">District Administration</h4>
+          <p class="stakeholder-desc">
+            Enhancing oversight for land acquisition, infrastructure planning, and revenue dispute resolution.
+          </p>
+        </div>
+
+        <!-- Stakeholder 5 -->
+        <div class="stakeholder-card">
+          <div class="stakeholder-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="12 8 8 12 12 16 12 8"></polygon></svg>
+          </div>
+          <h4 class="stakeholder-title">State Governments</h4>
+          <p class="stakeholder-desc">
+            Accelerating state-wide land modernization programs and enabling data-driven governance.
+          </p>
+        </div>
+
+        <!-- Stakeholder 6 -->
+        <div class="stakeholder-card">
+          <div class="stakeholder-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+          </div>
+          <h4 class="stakeholder-title">Central Ministries</h4>
+          <p class="stakeholder-desc">
+            Supporting national programs such as DILRMP with standardized, interoperable digital land records.
+          </p>
+        </div>
+
+        <!-- Stakeholder 7 -->
+        <div class="stakeholder-card">
+          <div class="stakeholder-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          </div>
+          <h4 class="stakeholder-title">Citizens</h4>
+          <p class="stakeholder-desc">
+            Benefiting from transparent ownership verification, reduced dispute delays, and accessible digital services.
+          </p>
+        </div>
+
+        <!-- Stakeholder 8 -->
+        <div class="stakeholder-card">
+          <div class="stakeholder-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+          </div>
+          <h4 class="stakeholder-title">Research Institutions</h4>
+          <p class="stakeholder-desc">
+            Utilizing anonymized aggregate spatial and land-use records for economic and agricultural research.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SUGGESTED TECHNOLOGY STACK SECTION
+       ========================================================================== -->
+  <section class="section" id="tech-stack" style="background: #FAF8F6; border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
+    <div class="container">
+      <div class="section-header">
+        <div class="chip chip-accent">Component Architecture</div>
+        <h2 class="headline-lg">Suggested Technology Stack</h2>
+        <p class="body-md">
+          Components and technologies suggested in the study to deliver high-performance digitization, validation, and integration.
+        </p>
+      </div>
+
+      <div class="tech-stack-grid">
+        <!-- Component 1 -->
+        <div class="tech-card">
+          <span class="tech-card-badge">DATABASE</span>
+          <h4 class="tech-card-title">Database</h4>
+          <ul class="tech-card-items">
+            <li class="tech-item"><span class="tech-item-bullet"></span>PostgreSQL with PostGIS</li>
+            <li class="tech-item"><span class="tech-item-bullet"></span>MySQL</li>
+          </ul>
+        </div>
+
+        <!-- Component 2 -->
+        <div class="tech-card">
+          <span class="tech-card-badge">COMPUTER VISION</span>
+          <h4 class="tech-card-title">Computer Vision</h4>
+          <ul class="tech-card-items">
+            <li class="tech-item"><span class="tech-item-bullet"></span>OpenCV</li>
+            <li class="tech-item"><span class="tech-item-bullet"></span>Detectron2</li>
+            <li class="tech-item"><span class="tech-item-bullet"></span>YOLO</li>
+          </ul>
+        </div>
+
+        <!-- Component 3 -->
+        <div class="tech-card">
+          <span class="tech-card-badge">GIS PLATFORM</span>
+          <h4 class="tech-card-title">GIS Platform</h4>
+          <ul class="tech-card-items">
+            <li class="tech-item"><span class="tech-item-bullet"></span>GeoServer</li>
+            <li class="tech-item"><span class="tech-item-bullet"></span>OpenLayers</li>
+            <li class="tech-item"><span class="tech-item-bullet"></span>Leaflet</li>
+            <li class="tech-item"><span class="tech-item-bullet"></span>QGIS</li>
+          </ul>
+        </div>
+
+        <!-- Component 4 -->
+        <div class="tech-card">
+          <span class="tech-card-badge">INTEGRATION APIS</span>
+          <h4 class="tech-card-title">APIs</h4>
+          <ul class="tech-card-items">
+            <li class="tech-item"><span class="tech-item-bullet"></span>RESTful APIs</li>
+            <li class="tech-item"><span class="tech-item-bullet"></span>GraphQL</li>
+          </ul>
+        </div>
+
+        <!-- Component 5 -->
+        <div class="tech-card">
+          <span class="tech-card-badge">NATURAL LANGUAGE</span>
+          <h4 class="tech-card-title">NLP</h4>
+          <ul class="tech-card-items">
+            <li class="tech-item"><span class="tech-item-bullet"></span>spaCy</li>
+            <li class="tech-item"><span class="tech-item-bullet"></span>Hugging Face Transformers</li>
+            <li class="tech-item"><span class="tech-item-bullet"></span>Indic NLP Library</li>
+          </ul>
+        </div>
+
+        <!-- Component 6 -->
+        <div class="tech-card">
+          <span class="tech-card-badge">CLOUD INFRASTRUCTURE</span>
+          <h4 class="tech-card-title">Cloud Infrastructure</h4>
+          <ul class="tech-card-items">
+            <li class="tech-item"><span class="tech-item-bullet"></span>NIC Cloud (MeghRaj)</li>
+            <li class="tech-item"><span class="tech-item-bullet"></span>AWS</li>
+            <li class="tech-item"><span class="tech-item-bullet"></span>Azure Government Cloud</li>
+          </ul>
+        </div>
+
+        <!-- Component 7 -->
+        <div class="tech-card">
+          <span class="tech-card-badge">VISUALIZATION</span>
+          <h4 class="tech-card-title">Analytics & Visualization</h4>
+          <ul class="tech-card-items">
+            <li class="tech-item"><span class="tech-item-bullet"></span>Power BI</li>
+            <li class="tech-item"><span class="tech-item-bullet"></span>Apache Superset</li>
+            <li class="tech-item"><span class="tech-item-bullet"></span>Plotly</li>
+            <li class="tech-item"><span class="tech-item-bullet"></span>Grafana</li>
+          </ul>
+        </div>
+
+        <!-- Component 8 -->
+        <div class="tech-card">
+          <span class="tech-card-badge">NOTIFICATIONS</span>
+          <h4 class="tech-card-title">Notification Services</h4>
+          <ul class="tech-card-items">
+            <li class="tech-item"><span class="tech-item-bullet"></span>SMS Gateway</li>
+            <li class="tech-item"><span class="tech-item-bullet"></span>Email APIs</li>
+            <li class="tech-item"><span class="tech-item-bullet"></span>Push Notifications</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SECURITY & GOVERNANCE SECTION
+       ========================================================================== -->
+  <section class="section" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="chip">Security & Compliance</div>
+        <h2 class="headline-lg">Role-based security & audit management.</h2>
+        <p class="body-md">
+          Ensuring controlled access to sensitive land-record data and maintaining comprehensive audit trails throughout the digitization lifecycle.
+        </p>
+      </div>
+
+      <div class="bento-grid">
+        <div class="card bento-card bento-card-normal">
+          <div class="card-inner">
+            <div class="bento-icon-wrapper">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            </div>
+            <div class="bento-content">
+              <h4>Role-Based Access Control</h4>
+              <p>
+                Granular role-based permissions ensuring secure, differentiated access for revenue clerks, verifiers, tehsildars, and administrators.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card bento-card bento-card-normal">
+          <div class="card-inner">
+            <div class="bento-icon-wrapper">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            </div>
+            <div class="bento-content">
+              <h4>Secure Document Repository</h4>
+              <p>
+                Centralized, protected repository with structured metadata management for historical registers, maps, and scanned files.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card bento-card bento-card-normal">
+          <div class="card-inner">
+            <div class="bento-icon-wrapper">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+            </div>
+            <div class="bento-content">
+              <h4>Audit Trails</h4>
+              <p>
+                Comprehensive logging of every document upload, AI extraction pass, manual verification edit, and approval action.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card bento-card bento-card-normal">
+          <div class="card-inner">
+            <div class="bento-icon-wrapper">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            </div>
+            <div class="bento-content">
+              <h4>Controlled Access to Sensitive Data</h4>
+              <p>
+                Safeguarding citizen property ownership records, mutation histories, and dispute-sensitive legal information.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       GOVERNANCE IMPACT (REPLACES FAKE TESTIMONIALS)
+       ========================================================================== -->
+  <section class="section" style="background: #FAF8F6; border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
+    <div class="container">
+      <div class="section-header">
+        <div class="chip chip-accent">Intended Impact</div>
+        <h2 class="headline-lg">Designed for Transparent, Data-Driven Land Governance</h2>
+        <p class="body-md">
+          Outcomes articulated in the study to advance India's land administration ecosystem through intelligent automation and verified data.
+        </p>
+      </div>
+
+      <div class="bento-grid" style="grid-template-columns: repeat(3, 1fr);">
+        <div class="card bento-card">
+          <div class="card-inner">
+            <div class="chip" style="margin-bottom: 8px;">OUTCOME 01</div>
+            <h4>Reduce Manual Effort</h4>
+            <p style="font-size: 13px; color: var(--color-secondary); margin-top: 6px;">
+              Automating character recognition and field classification significantly reduces manual data-entry overhead and administrative backlogs.
+            </p>
+          </div>
+        </div>
+
+        <div class="card bento-card">
+          <div class="card-inner">
+            <div class="chip" style="margin-bottom: 8px;">OUTCOME 02</div>
+            <h4>Improve Accuracy & Reliability</h4>
+            <p style="font-size: 13px; color: var(--color-secondary); margin-top: 6px;">
+              Automated validation against master databases combined with confidence scoring minimizes transcription errors and inconsistencies.
+            </p>
+          </div>
+        </div>
+
+        <div class="card bento-card">
+          <div class="card-inner">
+            <div class="chip" style="margin-bottom: 8px;">OUTCOME 03</div>
+            <h4>Accelerate Modernization</h4>
+            <p style="font-size: 13px; color: var(--color-secondary); margin-top: 6px;">
+              Supports modernization goals aligned with programs such as DILRMP by turning legacy paper registers into standardized digital datasets.
+            </p>
+          </div>
+        </div>
+
+        <div class="card bento-card">
+          <div class="card-inner">
+            <div class="chip" style="margin-bottom: 8px;">OUTCOME 04</div>
+            <h4>LRMS & GIS Interoperability</h4>
+            <p style="font-size: 13px; color: var(--color-secondary); margin-top: 6px;">
+              Enables seamless data flow between textual land records, cadastral maps, and modern land information systems via standard APIs.
+            </p>
+          </div>
+        </div>
+
+        <div class="card bento-card">
+          <div class="card-inner">
+            <div class="chip" style="margin-bottom: 8px;">OUTCOME 05</div>
+            <h4>Data-Driven Governance</h4>
+            <p style="font-size: 13px; color: var(--color-secondary); margin-top: 6px;">
+              Provides revenue authorities and district administrations with reliable data for infrastructure planning, taxation, and dispute resolution.
+            </p>
+          </div>
+        </div>
+
+        <div class="card bento-card">
+          <div class="card-inner">
+            <div class="chip" style="margin-bottom: 8px;">OUTCOME 06</div>
+            <h4>Citizen-Centric Transparency</h4>
+            <p style="font-size: 13px; color: var(--color-secondary); margin-top: 6px;">
+              Supports clear ownership verification, easier title searches, and transparent land administration for citizens.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       PROPOSED SYSTEM ARCHITECTURE & DEPLOYMENT FRAMEWORK (REPLACES PRICING)
+       ========================================================================== -->
+  <section class="section" id="architecture">
+    <div class="container">
+      <div class="section-header">
+        <div class="chip chip-accent">Proposed Deployment Architecture</div>
+        <h2 class="headline-lg">Built for Modern Land Administration</h2>
+        <p class="body-md">
+          A proposed multi-tier deployment framework designed to integrate with state land administration infrastructure and national digital governance platforms.
+        </p>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- Tier 1 -->
+        <div class="card pricing-card">
+          <div class="chip" style="font-size: 10px; margin-bottom: 12px;">TIER 1</div>
+          <h3 class="pricing-plan-title">Ingestion & Preprocessing</h3>
+          <p class="pricing-plan-desc">Intake layer for physical and scanned document archives.</p>
+          <ul class="pricing-features-list">
+            <li class="pricing-feature-item">
+              <span class="check-icon">✓</span>
+              <span>Scanned PDFs, TIFFs, and image batch upload</span>
+            </li>
+            <li class="pricing-feature-item">
+              <span class="check-icon">✓</span>
+              <span>Image deskewing, denoising & enhancement</span>
+            </li>
+            <li class="pricing-feature-item">
+              <span class="check-icon">✓</span>
+              <span>Metadata extraction and document cataloging</span>
+            </li>
+            <li class="pricing-feature-item">
+              <span class="check-icon">✓</span>
+              <span>Secure document repository integration</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Tier 2 (Featured) -->
+        <div class="card pricing-card featured">
+          <div class="pricing-badge-popular">CORE ENGINE</div>
+          <div class="chip chip-accent" style="font-size: 10px; margin-bottom: 12px;">TIER 2</div>
+          <h3 class="pricing-plan-title">AI Processing & Validation</h3>
+          <p class="pricing-plan-desc">Intelligent recognition, extraction, and validation pipeline.</p>
+          <ul class="pricing-features-list">
+            <li class="pricing-feature-item">
+              <span class="check-icon">✓</span>
+              <span>Multilingual OCR for Indian scripts</span>
+            </li>
+            <li class="pricing-feature-item">
+              <span class="check-icon">✓</span>
+              <span>Computer Vision table & boundary segmentation</span>
+            </li>
+            <li class="pricing-feature-item">
+              <span class="check-icon">✓</span>
+              <span>NLP field classification into 12 predefined attributes</span>
+            </li>
+            <li class="pricing-feature-item">
+              <span class="check-icon">✓</span>
+              <span>Business rules & cross-database validation</span>
+            </li>
+            <li class="pricing-feature-item">
+              <span class="check-icon">✓</span>
+              <span>Confidence scoring & human verification queue</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Tier 3 -->
+        <div class="card pricing-card">
+          <div class="chip" style="font-size: 10px; margin-bottom: 12px;">TIER 3</div>
+          <h3 class="pricing-plan-title">Interoperability Gateway</h3>
+          <p class="pricing-plan-desc">Integration with governance platforms and GIS systems.</p>
+          <ul class="pricing-features-list">
+            <li class="pricing-feature-item">
+              <span class="check-icon">✓</span>
+              <span>RESTful APIs and GraphQL interfaces</span>
+            </li>
+            <li class="pricing-feature-item">
+              <span class="check-icon">✓</span>
+              <span>Proposed LRMS and DILRMP database connectors</span>
+            </li>
+            <li class="pricing-feature-item">
+              <span class="check-icon">✓</span>
+              <span>GeoServer & PostGIS spatial layer sync</span>
+            </li>
+            <li class="pricing-feature-item">
+              <span class="check-icon">✓</span>
+              <span>Interactive administrative monitoring dashboards</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       FINAL CALL TO ACTION
+       ========================================================================== -->
+  <section class="final-cta-section">
+    <div class="container">
+      <div class="cta-banner-card">
+        <div class="cta-banner-content">
+          <div class="chip chip-accent" style="margin-bottom: 16px;">AI-Driven Land Record Transformation</div>
+          <h2 class="headline-lg">Modernize the way land records are digitized, validated, and managed.</h2>
+          <p class="body-md">
+            An AI-powered approach to turning complex legacy records into structured, validated digital information.
+          </p>
+
+          <div class="hero-cta-group" style="justify-content: center; margin-top: 24px; margin-bottom: 16px;">
+            <a href="#features" class="btn btn-primary btn-lg">Explore the Solution</a>
+            <a href="#workflow" class="btn btn-secondary btn-lg">View How It Works</a>
+          </div>
+
+          <div class="cta-guarantee-text">
+            Intelligent Land Record Digitization and Validation System • Proposed AI Solution
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       COMMAND PALETTE MODAL (⌘K)
+       ========================================================================== -->
+  <div class="modal-backdrop" id="cmdModalBackdrop" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="cmd-palette-box">
+      <div class="cmd-input-row">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" color="var(--color-secondary)">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" class="cmd-input-field" id="cmdSearchInput" placeholder="Search sample records, khasra numbers, surveys..." autocomplete="off">
+        <span class="chip" style="font-size: 10px;">ESC to exit</span>
+      </div>
+
+      <ul class="cmd-results-list" id="cmdResultsList">
+        <li class="cmd-result-item selected">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path></svg>
+            <span>Sample Khasra No. 101/1 — Sample Village (Demonstration Data)</span>
+          </div>
+          <span class="caption">Sample District</span>
+        </li>
+        <li class="cmd-result-item">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon></svg>
+            <span>Sample Cadastral Sheet 01 — Vector Boundary Layer (Demonstration)</span>
+          </div>
+          <span class="caption">GIS Cadastral</span>
+        </li>
+        <li class="cmd-result-item">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="12 8 8 12 12 16 12 8"></polygon></svg>
+            <span>Sample Historical Register Volume 01 (Demonstration Data)</span>
+          </div>
+          <span class="caption">Historical Record</span>
+        </li>
+        <li class="cmd-result-item">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path></svg>
+            <span>Validation Rule: Cross-Database LRMS Check</span>
+          </div>
+          <span class="caption">Validation Engine</span>
+        </li>
+        <li class="cmd-result-item">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect></svg>
+            <span>Role-Based Access Control (RBAC) Specification</span>
+          </div>
+          <span class="caption">Security</span>
+        </li>
+      </ul>
+
+      <div class="cmd-footer">
+        <span>Tip: Press <strong>↑</strong> and <strong>↓</strong> to navigate, <strong>Enter</strong> to select</span>
+        <span>LandAI Record Search</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div class="footer-brand-col">
+          <a href="#" class="brand-logo">
+            <div class="brand-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                <polyline points="2 17 12 22 22 17"></polyline>
+                <polyline points="2 12 12 17 22 12"></polyline>
+              </svg>
+            </div>
+            <span>LandAI</span>
+          </a>
+          <p>
+            Intelligent Land Record Digitization & Validation System. An AI-powered platform for converting legacy registers, scanned PDFs, and cadastral maps into structured, validated digital information.
+          </p>
+          <div class="status-pill-live">
+            <span class="status-dot-live"></span>
+            <span>Proposed System Architecture • Study Specifications</span>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h5>Platform</h5>
+          <ul class="footer-link-list">
+            <li><a href="#problem" class="footer-link">Challenges</a></li>
+            <li><a href="#workflow" class="footer-link">6-Stage Workflow</a></li>
+            <li><a href="#features" class="footer-link">Core Features</a></li>
+            <li><a href="#ai-approach" class="footer-link">AI Intelligence</a></li>
+            <li><a href="#land-data" class="footer-link">12 Predefined Fields</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Integration</h5>
+          <ul class="footer-link-list">
+            <li><a href="#gis" class="footer-link">GIS & Cadastral Maps</a></li>
+            <li><a href="#architecture" class="footer-link">Proposed LRMS & DILRMP Integration</a></li>
+            <li><a href="#tech-stack" class="footer-link">RESTful & GraphQL APIs</a></li>
+            <li><a href="#tech-stack" class="footer-link">PostgreSQL / PostGIS</a></li>
+            <li><a href="#dashboard" class="footer-link">Monitoring Dashboards</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Technology</h5>
+          <ul class="footer-link-list">
+            <li><a href="#tech-stack" class="footer-link">OCR & Indic NLP</a></li>
+            <li><a href="#tech-stack" class="footer-link">OpenCV, Detectron2, YOLO</a></li>
+            <li><a href="#tech-stack" class="footer-link">GeoServer, Leaflet, QGIS</a></li>
+            <li><a href="#tech-stack" class="footer-link">NIC Cloud (MeghRaj)</a></li>
+            <li><a href="#security" class="footer-link">Security & RBAC</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Stakeholders</h5>
+          <ul class="footer-link-list">
+            <li><a href="#stakeholders" class="footer-link">Revenue Departments</a></li>
+            <li><a href="#stakeholders" class="footer-link">Land Record Offices</a></li>
+            <li><a href="#stakeholders" class="footer-link">Survey Departments</a></li>
+            <li><a href="#stakeholders" class="footer-link">District Administration</a></li>
+            <li><a href="#stakeholders" class="footer-link">State & Central Governance</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom-row">
+        <div>
+          © 2026 Intelligent Land Record Digitization & Validation System. Designed for transparent, data-driven land governance.
+        </div>
+        <div class="footer-social-links">
+          <span style="font-size: 12px; color: var(--color-muted);">Source of Truth: Land Record.pdf • Demonstrations Use Illustrative Fictional Data</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- App JavaScript -->
+  <script src="app.js"></script>
+</body>
+</html>
