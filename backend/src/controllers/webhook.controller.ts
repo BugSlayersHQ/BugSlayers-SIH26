@@ -1,8 +1,21 @@
 import { Request, Response, NextFunction } from 'express';
 import { verifyWebhook } from '@clerk/express/webhooks';
+import { clerkClient } from '@clerk/express';
 
 import { prisma } from '../lib/prisma.js';
 import { AppError } from '../types/error.types.js';
+
+const getPrimaryEmail = (data: Record<string, unknown>): string | null => {
+  const emailAddresses = data.email_addresses as
+    Array<{ id: string; email_address: string }> | undefined;
+  if (!emailAddresses || emailAddresses.length === 0) return null;
+  const primaryId = data.primary_email_address_id as string | undefined;
+  if (primaryId) {
+    const primary = emailAddresses.find((e) => e.id === primaryId);
+    if (primary) return primary.email_address;
+  }
+  return emailAddresses[0]?.email_address || null;
+};
 
 export const clerkWebhook = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -17,11 +30,7 @@ export const clerkWebhook = async (req: Request, res: Response, next: NextFuncti
         const publicMetadata = (data.public_metadata || {}) as Record<string, unknown>;
         const role = publicMetadata.role;
 
-        const emailAddresses = data.email_addresses as Array<{ email_address: string }> | undefined;
-        const primaryEmail =
-          emailAddresses && emailAddresses.length > 0
-            ? emailAddresses[0]?.email_address || null
-            : null;
+        const primaryEmail = getPrimaryEmail(data);
 
         // A subordinate account is only ever created when BOTH conditions hold:
         // role === 'USER' AND adminId is present. Both are set exclusively by
@@ -120,6 +129,18 @@ export const clerkWebhook = async (req: Request, res: Response, next: NextFuncti
           // Treat as a new tenant owner (Admin).
           console.log(`Processing self-serve admin signup: ${clerkUserId}`);
 
+          // Assign role: 'ADMIN' in Clerk publicMetadata so authorize() middleware grants access
+          try {
+            await clerkClient.users.updateUserMetadata(clerkUserId, {
+              publicMetadata: {
+                role: 'ADMIN',
+              },
+            });
+            console.log(`Updated Clerk metadata with ADMIN role for: ${clerkUserId}`);
+          } catch (clerkErr) {
+            console.error(`Failed to assign ADMIN role in Clerk for ${clerkUserId}:`, clerkErr);
+          }
+
           try {
             const newAdmin = await prisma.admin.upsert({
               where: { clerkUserId },
@@ -146,11 +167,7 @@ export const clerkWebhook = async (req: Request, res: Response, next: NextFuncti
 
       case 'user.updated': {
         const clerkUserId = data.id as string;
-        const emailAddresses = data.email_addresses as Array<{ email_address: string }> | undefined;
-        const primaryEmail =
-          emailAddresses && emailAddresses.length > 0
-            ? emailAddresses[0]?.email_address
-            : undefined;
+        const primaryEmail = getPrimaryEmail(data);
 
         const firstName = data.first_name as string | undefined;
         const lastName = data.last_name as string | undefined;
@@ -190,17 +207,26 @@ export const clerkWebhook = async (req: Request, res: Response, next: NextFuncti
         const clerkUserId = data.id as string;
 
         if (clerkUserId) {
-          const deletedUsers = await prisma.user.deleteMany({
-            where: { clerkUserId },
-          });
-
-          const deletedAdmins = await prisma.admin.deleteMany({
-            where: { clerkUserId },
-          });
-
-          console.log(
-            `Records deleted for clerkUserId: ${clerkUserId} (users: ${deletedUsers.count}, admins: ${deletedAdmins.count})`,
-          );
+          const admin = await prisma.admin.findUnique({ where: { clerkUserId } });
+          if (admin) {
+            // Delete subordinate users first to satisfy FK constraint if non-cascade
+            const deletedUsers = await prisma.user.deleteMany({
+              where: { adminId: admin.id },
+            });
+            const deletedAdmins = await prisma.admin.deleteMany({
+              where: { clerkUserId },
+            });
+            console.log(
+              `Admin and subordinates deleted for clerkUserId: ${clerkUserId} (subordinate users: ${deletedUsers.count}, admins: ${deletedAdmins.count})`,
+            );
+          } else {
+            const deletedUsers = await prisma.user.deleteMany({
+              where: { clerkUserId },
+            });
+            console.log(
+              `User deleted for clerkUserId: ${clerkUserId} (users: ${deletedUsers.count})`,
+            );
+          }
         }
 
         return res.status(200).json({

@@ -5,11 +5,12 @@
   "description": "BugSlayers SIH 2026 backend",
   "type": "module",
   "scripts": {
-    "dev": "tsx watch --import dotenv/config src/server.ts",
-    "build": "tsc",
-    "start": "node dist/server.js",
+    "dev": "prisma generate && tsx watch --import dotenv/config src/server.ts",
+    "build": "prisma generate && tsc",
+    "start": "node --import dotenv/config dist/server.js",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "prisma generate && tsc --noEmit",
+    "postinstall": "prisma generate"
   },
   "packageManager": "pnpm@10.34.5",
   "dependencies": {

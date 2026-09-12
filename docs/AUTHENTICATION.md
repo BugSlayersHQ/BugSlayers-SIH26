@@ -242,19 +242,21 @@ return next(error);
 ```text
 src/
 ├── controllers/
-│   ├── admin.controller.ts     # Admin logic (signup, user management)
+│   ├── admin.controller.ts     # Admin logic
+│   ├── user.controller.ts      # User invitation management
 │   └── webhook.controller.ts   # Webhook verification & event processing
 ├── middleware/
 │   ├── auth.middleware.ts      # protect() and authorize()
 │   └── error.middleware.ts     # Centralized error formatting
 ├── routes/
-│   ├── admin.routes.ts
-│   ├── auth.routes.ts
+│   ├── admin.route.ts
+│   ├── health.route.ts
+│   ├── user.route.ts
 │   └── webhook.routes.ts
 ├── lib/
 │   └── prisma.ts               # Shared Prisma singleton
 ├── types/
-│   ├── auth.types.ts
+│   ├── auth.type.ts
 │   └── error.types.ts
 ├── generated/
 │   └── prisma/

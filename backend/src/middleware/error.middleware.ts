@@ -8,8 +8,12 @@ export const errorMiddleware = (
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _next: NextFunction,
 ) => {
-  const message = err.message || 'Internal Server Error';
   const statusCode = err.statusCode || 500;
+  const message = statusCode < 500 ? err.message || 'Client Error' : 'Internal Server Error';
+
+  if (statusCode >= 500) {
+    console.error('Unhandled Server Error:', err);
+  }
 
   res.status(statusCode).json({
     message,

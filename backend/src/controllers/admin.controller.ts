@@ -1,9 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
 
 export const adminController = async (req: Request, res: Response, next: NextFunction) => {
-  // Example method for admin functionality
   try {
-    // Perform admin-specific operations here
+    return res.status(200).json({
+      message: 'Admin endpoint placeholder',
+    });
   } catch (error) {
     return next(error);
   }

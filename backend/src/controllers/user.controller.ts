@@ -1,18 +1,32 @@
 import { Request, Response, NextFunction } from 'express';
 import { clerkClient } from '@clerk/express';
+import { z } from 'zod';
 
 import { prisma } from '../lib/prisma.js';
 import { AppError } from '../types/error.types.js';
 
+const createUserSchema = z.object({
+  email: z
+    .string({ error: 'Email is required' })
+    .trim()
+    .min(1, 'Email is required')
+    .email('Invalid email address'),
+  name: z.string().trim().optional(),
+  phone: z.string().trim().optional(),
+});
+
 export const createUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { name, email, phone } = req.body;
-
-    if (!email) {
-      const error: AppError = new Error('Email is required');
+    const parseResult = createUserSchema.safeParse(req.body);
+    if (!parseResult.success) {
+      const error: AppError = new Error(
+        parseResult.error.issues[0]?.message || 'Invalid input parameters',
+      );
       error.statusCode = 400;
       return next(error);
     }
+
+    const { name, email, phone } = parseResult.data;
 
     const clerkAdminId = req.userId;
 

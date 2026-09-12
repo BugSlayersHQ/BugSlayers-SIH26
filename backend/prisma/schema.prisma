@@ -25,7 +25,7 @@ model User {
   phone       String?
 
   adminId     Int
-  admin       Admin   @relation(fields: [adminId], references: [id])
+  admin       Admin    @relation(fields: [adminId], references: [id], onDelete: Cascade)
 
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
