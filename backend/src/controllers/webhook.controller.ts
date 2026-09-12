@@ -9,17 +9,18 @@ export const clerkWebhook = async (req: Request, res: Response, next: NextFuncti
     const evt = await verifyWebhook(req);
     console.log(`Clerk webhook received: ${evt.type}`);
 
-    const data = evt.data as any;
+    const data = evt.data as unknown as Record<string, unknown>;
 
     switch (evt.type) {
       case 'user.created': {
         const clerkUserId = data.id as string;
-        const publicMetadata = (data.public_metadata || {}) as Record<string, any>;
+        const publicMetadata = (data.public_metadata || {}) as Record<string, unknown>;
         const role = publicMetadata.role;
 
+        const emailAddresses = data.email_addresses as Array<{ email_address: string }> | undefined;
         const primaryEmail =
-          data.email_addresses && data.email_addresses.length > 0
-            ? (data.email_addresses[0].email_address as string)
+          emailAddresses && emailAddresses.length > 0
+            ? emailAddresses[0]?.email_address || null
             : null;
 
         // A subordinate account is only ever created when BOTH conditions hold:
@@ -60,15 +61,19 @@ export const clerkWebhook = async (req: Request, res: Response, next: NextFuncti
             return next(error);
           }
 
+          const firstName = data.first_name as string | undefined;
+          const lastName = data.last_name as string | undefined;
+          const phoneNumbers = data.phone_numbers as Array<{ phone_number: string }> | undefined;
+
           const name =
-            publicMetadata.name ||
-            [data.first_name, data.last_name].filter(Boolean).join(' ') ||
+            (publicMetadata.name as string | undefined) ||
+            [firstName, lastName].filter(Boolean).join(' ') ||
             'Invited User';
 
           const phone =
-            publicMetadata.phone ||
-            (data.phone_numbers && data.phone_numbers.length > 0
-              ? (data.phone_numbers[0].phone_number as string)
+            (publicMetadata.phone as string | undefined) ||
+            (phoneNumbers && phoneNumbers.length > 0
+              ? phoneNumbers[0]?.phone_number || null
               : null);
 
           try {
@@ -92,11 +97,12 @@ export const clerkWebhook = async (req: Request, res: Response, next: NextFuncti
               message: 'User created successfully via webhook',
               user: newUser,
             });
-          } catch (err: any) {
+          } catch (err: unknown) {
+            const prismaErr = err as { code?: string };
             // Unique constraint on email — an account with this email already
             // exists (e.g. re-invited after a previous partial signup). Link
             // the existing record to this Clerk identity instead of failing.
-            if (err.code === 'P2002') {
+            if (prismaErr.code === 'P2002') {
               const updatedUser = await prisma.user.update({
                 where: { email: primaryEmail },
                 data: { clerkUserId },
@@ -127,8 +133,9 @@ export const clerkWebhook = async (req: Request, res: Response, next: NextFuncti
               message: 'Admin created successfully',
               admin: newAdmin,
             });
-          } catch (err: any) {
-            if (err.code === 'P2002') {
+          } catch (err: unknown) {
+            const prismaErr = err as { code?: string };
+            if (prismaErr.code === 'P2002') {
               // Race between two retried webhook deliveries — treat as success.
               return res.status(200).json({ message: 'Admin already exists' });
             }
@@ -139,12 +146,15 @@ export const clerkWebhook = async (req: Request, res: Response, next: NextFuncti
 
       case 'user.updated': {
         const clerkUserId = data.id as string;
+        const emailAddresses = data.email_addresses as Array<{ email_address: string }> | undefined;
         const primaryEmail =
-          data.email_addresses && data.email_addresses.length > 0
-            ? (data.email_addresses[0].email_address as string)
+          emailAddresses && emailAddresses.length > 0
+            ? emailAddresses[0]?.email_address
             : undefined;
 
-        const name = [data.first_name, data.last_name].filter(Boolean).join(' ');
+        const firstName = data.first_name as string | undefined;
+        const lastName = data.last_name as string | undefined;
+        const name = [firstName, lastName].filter(Boolean).join(' ');
 
         // A clerkUserId belongs to exactly one of User or Admin — check both,
         // since we don't know from the event alone which table it lives in.

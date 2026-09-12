@@ -69,15 +69,21 @@ export const createUser = async (req: Request, res: Response, next: NextFunction
       message: 'Invitation sent successfully via Clerk email',
       invitation,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error creating user invitation:', error);
 
+    const err = error as {
+      errors?: Array<{ longMessage?: string; message?: string }>;
+      message?: string;
+      status?: number;
+    };
+
     const message =
-      error?.errors?.[0]?.longMessage ||
-      error?.errors?.[0]?.message ||
-      error?.message ||
+      err?.errors?.[0]?.longMessage ||
+      err?.errors?.[0]?.message ||
+      err?.message ||
       'Failed to create user invitation';
-    const statusCode = error?.status || 500;
+    const statusCode = err?.status || 500;
 
     const appError: AppError = new Error(message);
     appError.statusCode = statusCode;
