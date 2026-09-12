@@ -5,7 +5,7 @@
   "description": "BugSlayers SIH 2026 backend",
   "type": "module",
   "scripts": {
-    "dev": "tsx watch src/server.ts",
+    "dev": "tsx watch --import dotenv/config src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
     "lint": "eslint .",

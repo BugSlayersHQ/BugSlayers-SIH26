@@ -1,0 +1,5 @@
+Feature,Method,Endpoint,Description,Required Role,Authentication Required
+System Health,GET,/api,Check API health status,None,No
+Admin Operations,GET,/api/admin/admin,Placeholder for admin-specific functionality,ADMIN,Yes
+User Management,POST,/api/user/create,Send an invitation to create a subordinate user,ADMIN,Yes
+Identity Sync,POST,/api/webhooks/clerk,Handle Clerk user events (created/updated/deleted),None (Webhook signature),No

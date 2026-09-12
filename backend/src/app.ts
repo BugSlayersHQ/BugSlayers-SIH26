@@ -7,8 +7,8 @@ import { clerkMiddleware } from '@clerk/express';
 
 import healthRouter from './routes/health.route.js';
 import adminRouter from './routes/admin.route.js';
-import authRouter from './routes/auth.routes.js';
 import webhookRouter from './routes/webhook.routes.js';
+import userRouter from './routes/user.route.js';
 
 export const app = express();
 
@@ -30,7 +30,7 @@ app.use(morgan('dev'));
 // Routes
 app.use('/api', healthRouter);
 app.use('/api/admin', adminRouter);
-app.use('/api/auth', authRouter);
+app.use('/api/user', userRouter);
 
 // Error handling middleware
 app.use(errorMiddleware);

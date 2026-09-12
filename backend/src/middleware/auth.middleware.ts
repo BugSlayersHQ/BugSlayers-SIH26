@@ -5,6 +5,7 @@ import { Role } from '../types/auth.type.js';
 
 export const protect = (req: Request, res: Response, next: NextFunction) => {
   try {
+    console.log('Protect middleware called');
     const { isAuthenticated, userId } = getAuth(req);
 
     if (!isAuthenticated || !userId) {
@@ -17,6 +18,7 @@ export const protect = (req: Request, res: Response, next: NextFunction) => {
 
     next();
   } catch (error) {
+    console.error(error);
     next(error);
   }
 };
@@ -24,6 +26,7 @@ export const protect = (req: Request, res: Response, next: NextFunction) => {
 export const authorize = (...allowedRoles: Role[]) => {
   return async (req: Request, res: Response, next: NextFunction) => {
     try {
+      console.log('Authorize middleware called');
       const user = await clerkClient.users.getUser(req.userId as string);
 
       const role = user.publicMetadata.role as Role;
@@ -36,6 +39,7 @@ export const authorize = (...allowedRoles: Role[]) => {
 
       next();
     } catch (error) {
+      console.error(error);
       next(error);
     }
   };

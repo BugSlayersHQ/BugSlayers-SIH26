@@ -119,18 +119,16 @@ Roles are securely stored in Clerk's `publicMetadata`:
 
 ## 5. The Admin Signup Flow
 
-The system features a dedicated Admin onboarding flow (`POST /api/auth/admin-signup`). This endpoint strictly requires an authenticated Clerk user.
+The system handles Admin onboarding automatically via Clerk webhooks (`POST /api/webhooks/clerk`). When a user signs up independently (i.e. not via an invite), they are recognized as a new Admin.
 
 ### Step-by-Step Process:
 
-1.  **Authenticate:** User creates/authenticates a Clerk account (yields `userId`).
-2.  **Request:** Client sends a POST request to `/api/auth/admin-signup`.
-3.  **Protect:** The `protect()` middleware verifies the active Clerk session.
-4.  **Extract:** The backend retrieves `req.userId`.
-5.  **Validate:** Checks PostgreSQL to ensure the user doesn't already exist as an Admin or User.
-6.  **Assign Role:** Backend updates Clerk metadata: `{"role": "ADMIN"}`.
-7.  **Provision:** Backend creates the PostgreSQL `Admin` record.
-8.  **Success:** Returns `{"message": "Admin signup completed successfully"}`.
+1.  **Authenticate:** User creates/authenticates a Clerk account.
+2.  **Webhook Trigger:** Clerk sends a `user.created` webhook to the backend.
+3.  **Process:** The webhook controller checks if the user has a `role` of `USER` and an `adminId` in their metadata.
+4.  **Admin Assignment:** Since independent signups do not have this metadata, they fall into the self-serve signup branch.
+5.  **Provision:** Backend creates the PostgreSQL `Admin` record and links it to the `clerkUserId`.
+6.  **Success:** The new tenant owner (Admin) is fully provisioned in the application database.
 
 ---
 
@@ -274,13 +272,11 @@ src/
 - [ ] Authenticated requests contain a valid Clerk identity.
 - [ ] Unauthenticated requests are rejected (`401`).
 
-### Admin Signup
+### Admin and User Creation
 
-- [ ] Authenticated user can complete Admin signup.
-- [ ] Admin role is saved in Clerk metadata.
-- [ ] Admin database record is created in PostgreSQL.
-- [ ] Duplicate Admin signup returns `409`.
-- [ ] Existing User cannot hijack the Admin flow.
+- [ ] Authenticated user can complete self-serve signup and is correctly provisioned as an Admin.
+- [ ] Admin can invite a user, and the invitation creates a subordinate User correctly linked to the Admin via webhook.
+- [ ] Duplicate webhooks are handled idempotently.
 
 ### Middleware
 
@@ -300,7 +296,6 @@ src/
 
 _These features are out-of-scope for the basic implementation but planned for future iterations:_
 
-- Admin invitation system & User account creation
 - Document uploads (Cloudinary) & Assignment
 - Granular user-specific document access
 - Advanced Webhook data synchronization
