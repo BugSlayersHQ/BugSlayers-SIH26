@@ -1,4 +1,4 @@
-node_modules
+﻿node_modules
 .next
 dist
 build
@@ -6,3 +6,4 @@ coverage
 .pnpm-store
 
 frontend/next-env.d.ts
+backend/src/generated
