@@ -3,7 +3,7 @@
 ## Overview
 
 The File Management feature allows land records (PDFs and images) to be uploaded
-to Cloudflare R2, stored securely, and selectively shared with registered users
+to AWS S3, stored securely, and selectively shared with registered users
 through an assignment system. Admins control uploads, deletions, and assignments.
 Users can only access files that have been explicitly assigned to them.
 
@@ -18,26 +18,22 @@ Express API  (backend/src/app.ts  →  /api/files)
        ↓
 Multer  (memory storage, MIME + size validation)
        ↓
-AWS SDK v3  (S3-compatible client in src/lib/storage.ts)
+AWS SDK v3  (S3Client in src/lib/storage.ts)
        ↓
-Cloudflare R2  (private bucket, object stored under land-records/<unique-key>)
+AWS S3  (private bucket, object stored under land-records/<unique-key>)
        ↓
 PostgreSQL / Prisma  (File + FileAssignment metadata only — no URLs stored)
 ```
-
-The AWS SDK v3 is used because Cloudflare R2 exposes an S3-compatible API.
-Swapping to AWS S3 later requires only environment variable changes — no code changes.
 
 ---
 
 ## Storage Strategy
 
-- Cloudflare R2 is used for development and testing.
-- The AWS SDK v3 `S3Client` communicates with R2 via the S3-compatible endpoint.
+- AWS S3 is used for object storage.
+- The AWS SDK v3 `S3Client` communicates with AWS S3 using standard IAM credentials.
 - PostgreSQL stores only the `storageKey` (e.g. `land-records/<unique-filename>`).
-- No R2/S3 URLs or credentials are ever stored in the database.
+- No AWS S3 URLs or credentials are ever stored in the database.
 - Presigned download URLs are generated on demand and expire after 300 seconds.
-- Switching to AWS S3 is purely a configuration change (see **AWS S3 Migration**).
 
 ---
 
@@ -54,7 +50,7 @@ backend/
 │   │   ├── auth.middleware.ts      # protect + authorize (Clerk)
 │   │   └── upload.middleware.ts   # Multer memory storage, MIME + size validation
 │   ├── lib/
-│   │   └── storage.ts             # S3Client initialisation (R2 / S3 compatible)
+│   │   └── storage.ts             # S3Client initialisation
 │   └── types/
 │       ├── error.types.ts         # AppError interface
 │       └── express.d.ts           # Express Request augmentation (userId)
@@ -74,47 +70,28 @@ backend/
 
 Add these to your `.env` file (see `.env.example` for placeholders):
 
-| Variable                    | Description                    | Example                                         |
-| --------------------------- | ------------------------------ | ----------------------------------------------- |
-| `STORAGE_REGION`            | R2/S3 region                   | `auto`                                          |
-| `STORAGE_ENDPOINT`          | R2 S3-compatible endpoint URL  | `https://<ACCOUNT_ID>.r2.cloudflarestorage.com` |
-| `STORAGE_ACCESS_KEY_ID`     | R2 API token Access Key ID     | `abc123...`                                     |
-| `STORAGE_SECRET_ACCESS_KEY` | R2 API token Secret Access Key | `xyz789...`                                     |
-| `STORAGE_BUCKET`            | Name of the R2 bucket          | `villagearc-land-records`                       |
+| Variable                    | Description               | Example                                    |
+| --------------------------- | ------------------------- | ------------------------------------------ |
+| `STORAGE_REGION`            | AWS S3 region             | `ap-south-1`                               |
+| `STORAGE_ACCESS_KEY_ID`     | AWS IAM Access Key ID     | `AKIAIOSFODNN7EXAMPLE`                     |
+| `STORAGE_SECRET_ACCESS_KEY` | AWS IAM Secret Access Key | `wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY` |
+| `STORAGE_BUCKET`            | Name of the AWS S3 bucket | `villagearc-land-records`                  |
 
 > **Never commit real credentials.** The `.env` file is git-ignored.
 
 ---
 
-## R2 Setup
+## AWS S3 Setup
 
-1. Log in to the [Cloudflare dashboard](https://dash.cloudflare.com/).
-2. Go to **R2 Object Storage** and create a new bucket (e.g. `villagearc-land-records`).
-3. Keep the bucket **private** (no public access).
-4. Go to **R2 → Manage R2 API Tokens** and create a new API token with:
-   - Permission: **Object Read & Write**
-   - Scope: the bucket you created.
-5. Note your **Cloudflare Account ID** (visible in the right sidebar of the dashboard).
-6. Construct your R2 S3 endpoint: `https://<ACCOUNT_ID>.r2.cloudflarestorage.com`
-7. Add the five `STORAGE_*` variables to your `.env` file.
+1. Log in to the [AWS Management Console](https://aws.amazon.com/console/).
+2. Go to **S3** and create a new bucket (e.g. `villagearc-land-records`).
+3. Keep the bucket **private** (Block all public access).
+4. Go to **IAM** and create a new user with programmatic access.
+5. Attach a policy to the user allowing `s3:PutObject`, `s3:GetObject`, and `s3:DeleteObject` on the bucket.
+6. Note the **Access Key ID** and **Secret Access Key**.
+7. Add the four `STORAGE_*` variables to your `.env` file.
 8. Start the backend: `pnpm dev` (from `backend/`).
 9. Test upload with a multipart POST to `POST /api/files/create` (Admin token required).
-
----
-
-## AWS S3 Migration
-
-To switch from Cloudflare R2 to AWS S3, update only your environment variables:
-
-| Variable                    | R2 value                                        | S3 value                  |
-| --------------------------- | ----------------------------------------------- | ------------------------- |
-| `STORAGE_REGION`            | `auto`                                          | e.g. `ap-south-1`         |
-| `STORAGE_ENDPOINT`          | `https://<ACCOUNT_ID>.r2.cloudflarestorage.com` | _(remove or leave empty)_ |
-| `STORAGE_ACCESS_KEY_ID`     | R2 Access Key ID                                | AWS IAM Access Key ID     |
-| `STORAGE_SECRET_ACCESS_KEY` | R2 Secret Access Key                            | AWS IAM Secret Access Key |
-| `STORAGE_BUCKET`            | R2 bucket name                                  | S3 bucket name            |
-
-No controller or middleware code needs to change.
 
 ---
 
@@ -126,7 +103,7 @@ Client (multipart/form-data, field: file)
   → Controller reads req.file.buffer
   → Generates unique filename:  <timestamp>-<random>-<originalname>
   → Builds storage key:         land-records/<unique-filename>
-  → PutObjectCommand → R2 bucket
+  → PutObjectCommand → AWS S3 bucket
   → prisma.file.create  (stores metadata + storageKey only)
   → 201 response with file record
 ```
@@ -144,10 +121,10 @@ Client  GET /api/files/:id/download
   → GetObjectCommand with ResponseContentDisposition + ResponseContentType
   → getSignedUrl (expiresIn: 300 seconds)
   → 200 response with { url, expiresIn: 300 }
-  → Client uses the presigned URL to download directly from R2
+  → Client uses the presigned URL to download directly from AWS S3
 ```
 
-The R2 bucket is never made public. All access goes through the signed URL.
+The AWS S3 bucket is never made public. All access goes through the signed URL.
 
 ---
 
@@ -156,12 +133,12 @@ The R2 bucket is never made public. All access goes through the signed URL.
 ```
 Client  DELETE /api/files/:id  (Admin only)
   → Controller fetches File record (storageKey)
-  → DeleteObjectCommand → removes object from R2
+  → DeleteObjectCommand → removes object from AWS S3
   → prisma.file.delete  → cascades to FileAssignment rows
   → 200 response
 ```
 
-The R2 object is always deleted **before** the database record.
+The AWS S3 object is always deleted **before** the database record.
 
 ---
 
@@ -190,13 +167,13 @@ Admin  DELETE /api/files/:id/assign/:userId
 
 | Method   | Endpoint                        | Auth     | Role  | Description                                |
 | -------- | ------------------------------- | -------- | ----- | ------------------------------------------ |
-| `POST`   | `/api/files/create`             | Required | ADMIN | Upload a new file to R2                    |
+| `POST`   | `/api/files/create`             | Required | ADMIN | Upload a new file to AWS S3                |
 | `GET`    | `/api/files`                    | Required | ADMIN | List all files with uploader & assignments |
 | `GET`    | `/api/files/user/:userId`       | Required | Any   | Get files assigned to a user               |
 | `GET`    | `/api/files/:id/download`       | Required | Any   | Generate a presigned download URL          |
 | `GET`    | `/api/files/:id`                | Required | Any   | Get file details by ID                     |
 | `PATCH`  | `/api/files/:id`                | Required | ADMIN | Update file metadata (originalName)        |
-| `DELETE` | `/api/files/:id`                | Required | ADMIN | Delete file from R2 and database           |
+| `DELETE` | `/api/files/:id`                | Required | ADMIN | Delete file from AWS S3 and database       |
 | `POST`   | `/api/files/:id/assign`         | Required | ADMIN | Assign file to a user                      |
 | `DELETE` | `/api/files/:id/assign/:userId` | Required | ADMIN | Remove file assignment from a user         |
 | `GET`    | `/api/files/:id/assignments`    | Required | Any   | List assignments for a file                |
@@ -234,7 +211,7 @@ Content-Type: application/json
 }
 ```
 
-> **Note:** File replacement (swapping the actual object in R2) is not implemented
+> **Note:** File replacement (swapping the actual object in AWS S3) is not implemented
 > in this version. Only `originalName` metadata can be updated. To replace the
 > file content, delete the existing record and upload a new file.
 
@@ -271,7 +248,7 @@ Response:
   "success": true,
   "message": "Download URL generated successfully",
   "data": {
-    "url": "https://<ACCOUNT_ID>.r2.cloudflarestorage.com/...<presigned-params>",
+    "url": "https://villagearc-land-records.s3.ap-south-1.amazonaws.com/...<presigned-params>",
     "expiresIn": 300
   }
 }
@@ -336,17 +313,17 @@ The client uses `data.url` directly to download the file. The URL expires after 
 
 ### `File`
 
-| Column         | Type     | Description                           |
-| -------------- | -------- | ------------------------------------- |
-| `id`           | Int (PK) | Auto-increment primary key            |
-| `originalName` | String   | Human-readable filename               |
-| `fileName`     | String   | Unique filename used as R2 object key |
-| `mimeType`     | String   | MIME type of the uploaded file        |
-| `size`         | Int      | File size in bytes                    |
-| `storageKey`   | String   | R2 object key (`land-records/<name>`) |
-| `uploadedById` | Int (FK) | References `User.id`                  |
-| `createdAt`    | DateTime | Creation timestamp                    |
-| `updatedAt`    | DateTime | Last update timestamp                 |
+| Column         | Type     | Description                               |
+| -------------- | -------- | ----------------------------------------- |
+| `id`           | Int (PK) | Auto-increment primary key                |
+| `originalName` | String   | Human-readable filename                   |
+| `fileName`     | String   | Unique filename used as AWS S3 object key |
+| `mimeType`     | String   | MIME type of the uploaded file            |
+| `size`         | Int      | File size in bytes                        |
+| `storageKey`   | String   | AWS S3 object key (`land-records/<name>`) |
+| `uploadedById` | Int (FK) | References `User.id`                      |
+| `createdAt`    | DateTime | Creation timestamp                        |
+| `updatedAt`    | DateTime | Last update timestamp                     |
 
 ### `FileAssignment`
 
@@ -366,10 +343,10 @@ Unique constraint: `(fileId, userId)` — a file can only be assigned once per u
 
 | Concern                | Implementation                                                    |
 | ---------------------- | ----------------------------------------------------------------- |
-| Private R2 bucket      | No public access; all downloads via presigned URLs                |
+| Private AWS S3 bucket  | No public access; all downloads via presigned URLs                |
 | Presigned URL expiry   | 300 seconds (5 minutes)                                           |
 | Credential protection  | Credentials never stored in DB or returned in API responses       |
-| storageKey only        | No R2/S3 URLs stored in PostgreSQL                                |
+| storageKey only        | No AWS S3 URLs stored in PostgreSQL                               |
 | Upload authorization   | Admin-only (`authorize('ADMIN')` middleware)                      |
 | Download authorization | Role checked; non-admins verified against `FileAssignment`        |
 | User file isolation    | `GET /user/:userId` enforces caller == target for normal users    |
@@ -389,7 +366,7 @@ Unique constraint: `(fileId, userId)` — a file can only be assigned once per u
 | `403`  | Normal user attempting to access another user's files or download an unassigned file          |
 | `404`  | File, user, or assignment not found                                                           |
 | `409`  | File already assigned to the target user                                                      |
-| `500`  | Unexpected server error (R2 connectivity, DB failure, etc.)                                   |
+| `500`  | Unexpected server error (AWS S3 connectivity, DB failure, etc.)                               |
 
 ---
 
@@ -483,15 +460,15 @@ curl http://localhost:4000/api/files/1/download \
 
 ## Development Checklist
 
-- [ ] Cloudflare R2 bucket created and set to **private**
-- [ ] R2 API token created with Object Read & Write permission
-- [ ] Five `STORAGE_*` environment variables added to `.env`
+- [ ] AWS S3 bucket created and set to **private**
+- [ ] AWS IAM user created with `s3:PutObject`, `s3:GetObject`, and `s3:DeleteObject` permissions
+- [ ] Four `STORAGE_*` environment variables added to `.env`
 - [ ] `pnpm prisma migrate dev` run successfully (migration `20260913005730_add_file_management`)
 - [ ] `pnpm prisma generate` run (Prisma client updated)
 - [ ] Backend started with `pnpm dev`
-- [ ] Upload tested with a PDF — verify object appears in R2 console
+- [ ] Upload tested with a PDF — verify object appears in AWS S3 console
 - [ ] Download tested — verify presigned URL expires after 5 minutes
-- [ ] Delete tested — verify object disappears from R2 console
+- [ ] Delete tested — verify object disappears from AWS S3 console
 - [ ] Assign tested — verify user can download after assignment
 - [ ] Unauthorized download tested — verify 403 for unassigned user
 - [ ] Cross-user file list tested — verify 403 for normal user accessing another user's files
