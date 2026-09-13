@@ -1,9 +1,25 @@
 {
-  "name": "land-record-digitization-system",
-  "version": "1.0.0",
-  "description": "Intelligent Land Record Digitization and Validation System landing page",
+  "name": "landai-next",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "dev": "node server.js",
-    "start": "node server.js"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "cheerio": "^1.2.0",
+    "next": "16.3.5",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.5",
+    "typescript": "^5"
   }
 }
